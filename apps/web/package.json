@@ -11,6 +11,9 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
+    "@blocknote/core": "^0.29.1",
+    "@blocknote/mantine": "^0.29.1",
+    "@blocknote/react": "^0.29.1",
     "@repo/ui": "workspace:*",
     "@tailwindcss/postcss": "^4.1.4",
     "class-variance-authority": "^0.7.1",
