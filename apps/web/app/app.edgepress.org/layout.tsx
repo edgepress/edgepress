@@ -1,0 +1,42 @@
+"use client";
+
+import { useState } from "react";
+import { AppHeader } from "@/components/app/app-header";
+import { AppSidebar } from "@/components/app/app-sidebar";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
+
+export default function AppLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  // 為了響應式設計，在移動設備上使用抽屜式側邊欄
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-muted/40">
+      <AppHeader toggleSidebar={toggleSidebar} />
+      <div className="flex flex-1 h-[calc(100vh-3.5rem)]">
+        {/* 桌面版側邊欄 - 在中等尺寸以上顯示 */}
+        <div className="hidden md:block">
+          <AppSidebar />
+        </div>
+        
+        {/* 移動版側邊欄 - 使用 Sheet 組件 */}
+        <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+          <SheetContent side="left" className="p-0 w-64">
+            <AppSidebar />
+          </SheetContent>
+        </Sheet>
+        
+        {/* 主內容區域 */}
+        <main className="flex-1 overflow-y-auto p-6">
+          <div className="container max-w-5xl mx-auto">
+            {children}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
+}
