@@ -21,7 +21,7 @@ export default function Dashboard() {
 
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard 
-          title="Total Articles" 
+          title="Total Posts" 
           value={3} 
           icon={<FileText className="h-5 w-5" />}
           description="All time" 
@@ -50,9 +50,9 @@ export default function Dashboard() {
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Recent Articles</h2>
+          <h2 className="text-xl font-semibold">Recent Posts</h2>
           <Button asChild variant="outline" size="sm">
-            <Link href="/app.edgepress.org/articles">View all</Link>
+            <Link href="/app.edgepress.org/posts">View all</Link>
           </Button>
         </div>
         <ArticleList />
@@ -60,7 +60,7 @@ export default function Dashboard() {
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold">Draft Articles</h2>
+          <h2 className="text-xl font-semibold">Draft Posts</h2>
           <Button asChild variant="outline" size="sm">
             <Link href="/app.edgepress.org/drafts">View all drafts</Link>
           </Button>

@@ -17,9 +17,9 @@ export function AppSidebar() {
     <aside className="w-64 border-r h-[calc(100vh-3.5rem)] bg-background flex flex-col overflow-y-auto">
       <div className="p-4">
         <Button variant="outline" className="w-full justify-start gap-2" asChild>
-          <Link href="/app.edgepress.org/articles/new">
+          <Link href="/app.edgepress.org/posts/new">
             <PlusCircle className="h-4 w-4" />
-            New Article
+            New Post
           </Link>
         </Button>
       </div>
@@ -32,10 +32,10 @@ export function AppSidebar() {
               Dashboard
             </Button>
           </Link>
-          <Link href="/app.edgepress.org/articles" passHref>
+          <Link href="/app.edgepress.org/posts" passHref>
             <Button variant="ghost" className="w-full justify-start gap-2">
               <BookOpen className="h-4 w-4" />
-              Published Articles
+              Published Posts
             </Button>
           </Link>
           <Link href="/app.edgepress.org/drafts" passHref>
