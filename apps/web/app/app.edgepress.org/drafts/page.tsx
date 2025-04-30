@@ -14,7 +14,7 @@ export default function DraftsPage() {
           </p>
         </div>
         <Button asChild>
-          <Link href="/app.edgepress.org/articles/new">
+          <Link href="/posts/new">
             <PlusCircle className="mr-2 h-4 w-4" />
             New Draft
           </Link>

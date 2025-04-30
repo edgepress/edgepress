@@ -68,7 +68,7 @@ export default function NewPostPage() {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost" size="sm" className="gap-1">
-            <Link href="/app.edgepress.org/posts">
+            <Link href="/posts">
               <ChevronLeft className="h-4 w-4" />
               Back
             </Link>

@@ -52,7 +52,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Recent Posts</h2>
           <Button asChild variant="outline" size="sm">
-            <Link href="/app.edgepress.org/posts">View all</Link>
+            <Link href="/posts">View all</Link>
           </Button>
         </div>
         <ArticleList />
@@ -62,7 +62,7 @@ export default function Dashboard() {
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Draft Posts</h2>
           <Button asChild variant="outline" size="sm">
-            <Link href="/app.edgepress.org/drafts">View all drafts</Link>
+            <Link href="/drafts">View all drafts</Link>
           </Button>
         </div>
         <ArticleList status="draft" />
