@@ -25,7 +25,7 @@ export function AppHeader({ toggleSidebar }: AppHeaderProps) {
             <Menu className="h-5 w-5" />
           </Button>
         )}
-        <Link href="/app.edgepress.org" className="font-semibold text-lg">
+        <Link href="/" className="font-semibold text-lg">
           EdgePress
         </Link>
       </div>
@@ -50,13 +50,13 @@ export function AppHeader({ toggleSidebar }: AppHeaderProps) {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild>
-              <Link href="/app.edgepress.org" className="w-full">Dashboard</Link>
+              <Link href="/" className="w-full">Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/app.edgepress.org/profile" className="w-full">Profile</Link>
+              <Link href="/profile" className="w-full">Profile</Link>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <Link href="/app.edgepress.org/settings" className="w-full">Settings</Link>
+              <Link href="/settings" className="w-full">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
