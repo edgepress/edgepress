@@ -1,16 +1,5 @@
 # EdgePress
 
-<div align="center">
-  <img src="https://via.placeholder.com/200x200?text=EdgePress" alt="EdgePress Logo" width="200"/>
-  <p>A modern, collaborative content management system for the edge.</p>
-  
-  ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
-  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-</div>
-
-## Overview
-
 EdgePress is a modern content management system built for edge computing, featuring both admin and user-facing interfaces. It enables real-time collaborative editing and publishing of content with a clean, responsive UI.
 
 ## Features
@@ -57,7 +46,7 @@ EdgePress is a modern content management system built for edge computing, featur
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/edgepress.git
+git clone https://github.com/edgepress/edgepress.git
 cd edgepress
 
 # Install dependencies
@@ -75,12 +64,13 @@ pnpm build
 ```
 
 The development server will be available at:
-- Admin interface: http://localhost:3000/admin.edgepress.org
-- User interface: http://localhost:3000/app.edgepress.org
+
+- Admin interface: <http://admin.localhost:3000/>
+- User interface: <http://app.localhost:3000/>
 
 ## Project Structure
 
-```
+```text
 edgepress/
 ├── apps/
 │   ├── web/                     # Main Next.js application
@@ -120,7 +110,3 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
