@@ -1,84 +1,126 @@
-# Turborepo starter
+# EdgePress
 
-This Turborepo starter is maintained by the Turborepo core team.
+<div align="center">
+  <img src="https://via.placeholder.com/200x200?text=EdgePress" alt="EdgePress Logo" width="200"/>
+  <p>A modern, collaborative content management system for the edge.</p>
+  
+  ![Next.js](https://img.shields.io/badge/Next.js-black?style=for-the-badge&logo=next.js&logoColor=white)
+  ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+  ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+</div>
 
-## Using this example
+## Overview
 
-Run the following command:
+EdgePress is a modern content management system built for edge computing, featuring both admin and user-facing interfaces. It enables real-time collaborative editing and publishing of content with a clean, responsive UI.
 
-```sh
-npx create-turbo@latest
+## Features
+
+- **Dual Interfaces**
+  - Admin dashboard (admin.edgepress.org) for content and site management
+  - User portal (app.edgepress.org) for content creators
+
+- **Rich Content Editing**
+  - BlockNote rich text editor with collaborative editing
+  - File and image management
+  - Category and tag organization
+
+- **Modern Architecture**
+  - Edge-first deployment
+  - Real-time collaboration
+  - Responsive design for all devices
+
+## Tech Stack
+
+- **Frontend**
+  - Next.js (App Router)
+  - TypeScript
+  - Tailwind CSS
+  - Shadcn UI components
+  - BlockNote editor
+
+- **Backend**
+  - Vercel Edge Functions
+  - Real-time collaboration via Ember Link
+
+- **Developer Experience**
+  - pnpm workspaces for monorepo management
+  - Turborepo for build orchestration
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm 8+
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/edgepress.git
+cd edgepress
+
+# Install dependencies
+pnpm install
 ```
 
-## What's inside?
+### Development
 
-This Turborepo includes the following packages/apps:
+```bash
+# Run development server
+pnpm dev
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
+# Build for production
 pnpm build
 ```
 
-### Develop
+The development server will be available at:
+- Admin interface: http://localhost:3000/admin.edgepress.org
+- User interface: http://localhost:3000/app.edgepress.org
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Project Structure
 
 ```
-cd my-turborepo
-npx turbo login
+edgepress/
+├── apps/
+│   ├── web/                     # Main Next.js application
+│   │   ├── app/                 # App router
+│   │   │   ├── admin.edgepress.org/  # Admin interface
+│   │   │   └── app.edgepress.org/    # User interface
+│   │   ├── components/          # Shared components
+│   │   └── public/              # Static assets
+│   └── ...                      # Other applications
+├── packages/                    # Shared packages
+│   ├── ui/                      # UI components
+│   └── ...                      # Other packages
+└── ...
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+## Deployment
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+EdgePress is designed to be deployed on Vercel:
 
+```bash
+# Deploy to Vercel
+vercel
 ```
-npx turbo link
+
+For other platforms, build the project and deploy the output:
+
+```bash
+pnpm build
 ```
 
-## Useful Links
+## Contributing
 
-Learn more about the power of Turborepo:
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-- [Tasks](https://turborepo.com/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turborepo.com/docs/core-concepts/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
