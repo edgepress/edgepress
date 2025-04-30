@@ -1,33 +1,35 @@
 "use client";
 
-import { useState } from "react";
 import "@blocknote/core/fonts/inter.css";
 import { useCreateBlockNote } from "@blocknote/react";
 import { BlockNoteView } from "@blocknote/mantine";
 import "@blocknote/mantine/style.css";
+import dynamic from 'next/dynamic';
+import { useEffect } from 'react';
+import { type Block } from "@blocknote/core";
 
 interface PostEditorProps {
-  initialContent?: object;
-  onChange?: (content: object) => void;
+  initialContent?: Block[];
+  onChange?: (content: Block[]) => void;
 }
 
 export function PostEditor({ initialContent, onChange }: PostEditorProps) {
-  // 創建編輯器實例
   const editor = useCreateBlockNote({
-    initialContent: initialContent as any,
+    initialContent,
   });
 
-  // 當內容變更時觸發回調
-  editor.onEditorContentChange(() => {
-    if (onChange) {
-      editor.blocksToJSON().then((blocks) => {
-        onChange(blocks);
-      });
-    }
-  });
+  useEffect(() => {
+    if (!onChange) return;
+    
+    const unsubscribe = editor.onChange(() => {
+      onChange(editor.document);
+    });
+    
+    return unsubscribe;
+  }, [editor, onChange]);
 
   return (
-    <div className="border rounded-md overflow-hidden bg-background">
+    <div className="rounded-md overflow-hidden bg-background">
       <BlockNoteView
         editor={editor}
         theme="light"
@@ -36,9 +38,6 @@ export function PostEditor({ initialContent, onChange }: PostEditorProps) {
     </div>
   );
 }
-
-// 使用動態導入來解決 SSR 問題
-import dynamic from "next/dynamic";
 
 export const DynamicPostEditor = dynamic(
   () => Promise.resolve(PostEditor),
