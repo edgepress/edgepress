@@ -13,7 +13,6 @@ export default function NewPostPage() {
   const [publishing, setPublishing] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  // 處理保存草稿
   const handleSaveDraft = async () => {
     if (!title) {
       alert("Please enter a title for your post");
@@ -23,11 +22,9 @@ export default function NewPostPage() {
     setSaving(true);
     
     try {
-      // 這裡是模擬 API 調用
       console.log("Saving draft...", { title, content });
       await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
       
-      // 保存成功後的處理
       alert("Draft saved successfully!");
     } catch (error) {
       console.error("Error saving draft:", error);
@@ -37,7 +34,6 @@ export default function NewPostPage() {
     }
   };
 
-  // 處理發布文章
   const handlePublish = async () => {
     if (!title) {
       alert("Please enter a title for your post");
@@ -47,14 +43,10 @@ export default function NewPostPage() {
     setPublishing(true);
     
     try {
-      // 這裡是模擬 API 調用
       console.log("Publishing post...", { title, content });
       await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
       
-      // 發布成功後的處理
       alert("Post published successfully!");
-      // 發布後可以跳轉到文章列表頁面
-      // window.location.href = "/app.edgepress.org/posts";
     } catch (error) {
       console.error("Error publishing post:", error);
       alert("Failed to publish post. Please try again.");
