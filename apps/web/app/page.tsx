@@ -1,171 +1,204 @@
-import Image from "next/image";
 import Link from "next/link";
+import { buttonVariants } from "../components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
 
-export default function Home() {
+export default function DevHomePage() {
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
-      {/* Hero Section */}
-      <section className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">EdgePress Blog</h1>
-        <p className="text-xl text-muted-foreground mb-8">
-          Thoughts, stories and ideas about content management and publishing
+    <div className="container mx-auto p-8 max-w-6xl">
+      <header className="mb-8 pb-4 border-b">
+        <h1 className="text-3xl font-bold mb-2">EdgePress Development Portal</h1>
+        <p className="text-muted-foreground">
+          快速導航到各個環境和頁面（僅用於開發階段）
         </p>
-        
-        {/* Featured Post */}
-        <div className="bg-muted rounded-xl overflow-hidden shadow-sm">
-          <div className="md:flex">
-            <div className="md:w-1/2 h-64 md:h-auto relative">
-              <Image 
-                src="https://images.unsplash.com/photo-1499750310107-5fef28a66643" 
-                alt="Featured post" 
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-6 md:w-1/2 md:p-8">
-              <div className="text-sm text-muted-foreground mb-2">June 12, 2023 • 5 min read</div>
-              <h2 className="text-2xl font-bold mb-4">
-                <Link href="/posts/featured-post" className="hover:text-primary">
-                  The Future of Content Management in the Edge Computing Era
+      </header>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* 主要環境 */}
+        <Card>
+          <CardHeader className="bg-muted/50">
+            <CardTitle>主要環境</CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-medium">使用者介面</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="//app.localhost:3000/"
+                  className={buttonVariants({ variant: "default" })}
+                >
+                  App 主頁
                 </Link>
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                Explore how edge computing is transforming the way we create, manage, and distribute content across the web.
-              </p>
-              <Link 
-                href="/posts/featured-post" 
-                className="inline-flex items-center font-medium text-primary hover:underline"
-              >
-                Read more
-                <svg xmlns="http://www.w3.org/2000/svg" className="ml-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Recent Posts */}
-      <section className="mb-16">
-        <div className="flex justify-between items-center mb-8">
-          <h2 className="text-2xl font-bold">Recent Posts</h2>
-          <Link href="/posts" className="text-primary hover:underline">
-            View all
-          </Link>
-        </div>
-        
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-          {/* Post 1 */}
-          <article className="bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
-            <div className="h-48 relative">
-              <Image 
-                src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" 
-                alt="Blog post" 
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-5">
-              <div className="text-sm text-muted-foreground mb-2">May 28, 2023 • 3 min read</div>
-              <h3 className="text-xl font-bold mb-3">
-                <Link href="/posts/collaborative-editing" className="hover:text-primary">
-                  Building Real-time Collaborative Editing Tools
+                <Link 
+                  href="//app.localhost:3000/posts"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  所有文章
                 </Link>
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                A deep dive into the technology behind real-time collaborative content editing.
-              </p>
-            </div>
-          </article>
-          
-          {/* Post 2 */}
-          <article className="bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
-            <div className="h-48 relative">
-              <Image 
-                src="https://images.unsplash.com/photo-1558655146-d09347e92766" 
-                alt="Blog post" 
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-5">
-              <div className="text-sm text-muted-foreground mb-2">May 15, 2023 • 4 min read</div>
-              <h3 className="text-xl font-bold mb-3">
-                <Link href="/posts/responsive-design" className="hover:text-primary">
-                  Responsive Design Patterns for Modern Web Apps
+                <Link 
+                  href="//app.localhost:3000/posts/featured-post"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  文章詳情
                 </Link>
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Exploring effective responsive design strategies for content-heavy applications.
-              </p>
+              </div>
             </div>
-          </article>
-          
-          {/* Post 3 */}
-          <article className="bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
-            <div className="h-48 relative">
-              <Image 
-                src="https://images.unsplash.com/photo-1555066931-4365d14bab8c" 
-                alt="Blog post" 
-                fill
-                className="object-cover"
-              />
-            </div>
-            <div className="p-5">
-              <div className="text-sm text-muted-foreground mb-2">May 5, 2023 • 6 min read</div>
-              <h3 className="text-xl font-bold mb-3">
-                <Link href="/posts/performance-optimization" className="hover:text-primary">
-                  Performance Optimization for Content Delivery
+            
+            <div className="space-y-2">
+              <h3 className="font-medium">管理介面</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="//admin.localhost:3000/"
+                  className={buttonVariants({ variant: "default" })}
+                >
+                  Admin 主頁
                 </Link>
-              </h3>
-              <p className="text-muted-foreground mb-4">
-                Tips and tricks to optimize your content delivery for lightning-fast performance.
-              </p>
+                <Link 
+                  href="//admin.localhost:3000/users"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  用戶管理
+                </Link>
+                <Link 
+                  href="//admin.localhost:3000/settings"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  系統設置
+                </Link>
+              </div>
             </div>
-          </article>
-        </div>
-      </section>
-      
-      {/* Categories */}
-      <section className="mb-12">
-        <h2 className="text-2xl font-bold mb-6">Explore Topics</h2>
-        <div className="flex flex-wrap gap-2">
-          {['Technology', 'Design', 'Content Strategy', 'Development', 'UI/UX', 'Performance'].map((tag) => (
-            <Link 
-              key={tag} 
-              href={`/topics/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-              className="px-4 py-2 bg-muted text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
-            >
-              {tag}
-            </Link>
-          ))}
-        </div>
-      </section>
-      
-      {/* Newsletter */}
-      <section className="bg-muted p-8 rounded-xl">
-        <div className="md:flex md:items-center md:justify-between">
-          <div className="md:w-2/3 mb-4 md:mb-0">
-            <h2 className="text-2xl font-bold mb-2">Subscribe to our newsletter</h2>
-            <p className="text-muted-foreground">
-              Get the latest posts and updates delivered to your inbox.
-            </p>
-          </div>
-          <div className="md:w-1/3">
-            <div className="flex gap-2">
-              <input 
-                type="email" 
-                placeholder="Your email" 
-                className="flex-1 px-4 py-2 rounded-md border border-border bg-background"
-              />
-              <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md">
-                Subscribe
-              </button>
+          </CardContent>
+        </Card>
+
+        {/* 其他環境 */}
+        <Card>
+          <CardHeader className="bg-muted/50">
+            <CardTitle>其他環境</CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-medium">結帳流程</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="//checkout.localhost:3000/"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  結帳頁面
+                </Link>
+              </div>
             </div>
-          </div>
-        </div>
-      </section>
+            
+            <div className="space-y-2">
+              <h3 className="font-medium">API 測試</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="/api/health"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  Health Check
+                </Link>
+                <Link 
+                  href="/api/docs"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  API 文檔
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 開發工具 */}
+        <Card>
+          <CardHeader className="bg-muted/50">
+            <CardTitle>開發工具</CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-medium">組件庫</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="/dev/components"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  組件展示
+                </Link>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="font-medium">測試頁面</h3>
+              <div className="flex flex-wrap gap-2">
+                <Link 
+                  href="/dev/test-mode"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  測試模式
+                </Link>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* 資源鏈接 */}
+        <Card>
+          <CardHeader className="bg-muted/50">
+            <CardTitle>資源鏈接</CardTitle>
+          </CardHeader>
+          <CardContent className="p-6 space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-medium">文檔</h3>
+              <div className="flex flex-wrap gap-2">
+                <a 
+                  href="https://github.com/edgepress/edgepress" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  GitHub Repo
+                </a>
+                <a 
+                  href="https://edgepress.org/docs" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  開發文檔
+                </a>
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <h3 className="font-medium">開發環境</h3>
+              <div className="flex flex-wrap gap-2">
+                <a 
+                  href="http://localhost:9000" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  開發服務器
+                </a>
+                <a 
+                  href="http://localhost:8080" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  數據庫管理
+                </a>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <footer className="mt-8 pt-4 border-t text-center text-sm text-muted-foreground">
+        <p>EdgePress 開發版本 - 此頁面僅供開發使用，不會在生產環境顯示</p>
+        <p className="mt-1">
+          執行環境: <code className="bg-muted px-1 py-0.5 rounded text-xs">{process.env.NODE_ENV}</code> | 
+          版本: <code className="bg-muted px-1 py-0.5 rounded text-xs">dev</code>
+        </p>
+      </footer>
     </div>
   );
 }
