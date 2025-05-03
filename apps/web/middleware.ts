@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { ADMIN_HOSTNAMES, APP_HOSTNAMES } from '@/lib/constants';
-import { AdminMiddleware, AppMiddleware } from '@/lib/middleware';
+import { AdminMiddleware, AppMiddleware, SiteMiddleware } from '@/lib/middleware';
 
 export const config = {
   matcher: [
@@ -34,5 +34,7 @@ export default async function middleware(request: NextRequest) {
     return AppMiddleware(request);
   }
 
-  return NextResponse.next();
+  return SiteMiddleware(request);
+
+  // return NextResponse.next();
 }
