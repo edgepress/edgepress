@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ArticleList } from "@/components/app/article-list";
+import { PostList } from "@/components/app/article-list";
 import { PlusCircle } from "lucide-react";
 
 export default function PostsPage() {
@@ -22,7 +22,7 @@ export default function PostsPage() {
       </div>
 
       <div className="space-y-4">
-        <ArticleList status="published" />
+        <PostList status="published" />
       </div>
     </div>
   );

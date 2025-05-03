@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 // 模擬文章資料
-const mockArticles = [
+const mockPosts = [
   {
     id: "1",
     title: "Getting Started with Next.js",
@@ -43,11 +43,11 @@ const mockArticles = [
   },
 ];
 
-export function ArticleList({ status = "all" }: { status?: "all" | "published" | "draft" }) {
+export function PostList({ status = "all" }: { status?: "all" | "published" | "draft" }) {
   // 根據狀態過濾文章
-  const articles = status === "all" 
-    ? mockArticles 
-    : mockArticles.filter(article => 
+  const posts = status === "all" 
+    ? mockPosts 
+    : mockPosts.filter(article => 
         status === "draft" 
           ? article.status === "draft" 
           : article.status === "published"
@@ -55,25 +55,25 @@ export function ArticleList({ status = "all" }: { status?: "all" | "published" |
 
   return (
     <div className="space-y-4">
-      {articles.length === 0 ? (
+      {posts.length === 0 ? (
         <div className="text-center p-8">
           <p className="text-muted-foreground">No articles found</p>
         </div>
       ) : (
-        articles.map((article) => (
+        posts.map((post) => (
           <div 
-            key={article.id} 
+            key={post.id} 
             className="p-4 border rounded-lg bg-background hover:bg-muted/30 transition-colors"
           >
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <h3 className="font-medium">
-                  <Link href={`/app.edgepress.org/articles/${article.id}`} className="hover:underline">
-                    {article.title}
+                  <Link href={`/posts/${post.id}`} className="hover:underline">
+                    {post.title}
                   </Link>
                 </h3>
                 <p className="text-sm text-muted-foreground line-clamp-2">
-                  {article.excerpt}
+                  {post.excerpt}
                 </p>
               </div>
               <DropdownMenu>
@@ -84,13 +84,13 @@ export function ArticleList({ status = "all" }: { status?: "all" | "published" |
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem asChild>
-                    <Link href={`/app.edgepress.org/articles/${article.id}/edit`}>
+                    <Link href={`/posts/${post.id}/edit`}>
                       <Edit className="mr-2 h-4 w-4" />
                       Edit
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
-                    <Link href={`/app.edgepress.org/articles/${article.id}`}>
+                    <Link href={`/posts/${post.id}`}>
                       <Eye className="mr-2 h-4 w-4" />
                       View
                     </Link>
@@ -106,12 +106,12 @@ export function ArticleList({ status = "all" }: { status?: "all" | "published" |
             <div className="flex items-center gap-4 mt-2">
               <span className="flex items-center text-xs text-muted-foreground">
                 <CalendarDays className="mr-1 h-3 w-3" />
-                {article.createdAt}
+                {post.createdAt}
               </span>
-              {article.status === "published" ? (
+              {post.status === "published" ? (
                 <span className="flex items-center text-xs text-muted-foreground">
                   <Eye className="mr-1 h-3 w-3" />
-                  {article.views} views
+                  {post.views} views
                 </span>
               ) : (
                 <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full">

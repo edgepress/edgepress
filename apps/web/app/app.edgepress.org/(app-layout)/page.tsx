@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { StatsCard } from "@/components/app/stats-card";
-import { ArticleList } from "@/components/app/article-list";
+import { PostList } from "@/components/app/article-list";
 import { 
   FileText, 
   FileEdit, 
@@ -55,7 +55,7 @@ export default function Dashboard() {
             <Link href="/posts">View all</Link>
           </Button>
         </div>
-        <ArticleList />
+        <PostList />
       </div>
 
       <div className="space-y-4">
@@ -65,7 +65,7 @@ export default function Dashboard() {
             <Link href="/drafts">View all drafts</Link>
           </Button>
         </div>
-        <ArticleList status="draft" />
+        <PostList status="draft" />
       </div>
     </div>
   );
