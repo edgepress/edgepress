@@ -1,0 +1,69 @@
+"use client"
+
+import { AppSidebar } from "@/components/app/app-sidebar";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
+import { Separator } from "@/components/ui/separator";
+import {
+  SidebarInset,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { ReactNode } from "react";
+
+interface AppLayoutProps {
+  children: ReactNode;
+  title?: string;
+  breadcrumbs?: Array<{
+    title: string;
+    href?: string;
+  }>;
+}
+
+export function AppLayout({ children, title, breadcrumbs = [] }: AppLayoutProps) {
+  return (
+    <>
+      <AppSidebar />
+      <SidebarInset>
+        <header className="flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear">
+          <div className="flex items-center gap-2 px-4">
+            <SidebarTrigger className="-ml-1" />
+            <Separator orientation="vertical" className="mr-2 h-4" />
+            <Breadcrumb>
+              <BreadcrumbList>
+                {breadcrumbs.map((item, index) => (
+                  <React.Fragment key={index}>
+                    {index > 0 && <BreadcrumbSeparator className="hidden md:block" />}
+                    <BreadcrumbItem className="hidden md:block">
+                      {item.href ? (
+                        <BreadcrumbLink href={item.href}>{item.title}</BreadcrumbLink>
+                      ) : (
+                        <BreadcrumbPage>{item.title}</BreadcrumbPage>
+                      )}
+                    </BreadcrumbItem>
+                  </React.Fragment>
+                ))}
+                {title && (
+                  <>
+                    {breadcrumbs.length > 0 && <BreadcrumbSeparator />}
+                    <BreadcrumbItem>
+                      <BreadcrumbPage>{title}</BreadcrumbPage>
+                    </BreadcrumbItem>
+                  </>
+                )}
+              </BreadcrumbList>
+            </Breadcrumb>
+          </div>
+        </header>
+        <main className="flex flex-1 flex-col gap-4 p-4">
+          {children}
+        </main>
+      </SidebarInset>
+    </>
+  );
+} 
