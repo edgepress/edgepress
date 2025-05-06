@@ -9,6 +9,7 @@ import {
   Building,
   Plus,
   Users,
+  ChevronRight,
 } from "lucide-react"
 
 import {
@@ -78,7 +79,7 @@ const MOCK_ORGANIZATIONS: Organization[] = [
 
 export function NavUser() {
   const { isMobile } = useSidebar()
-  const [currentOrg, setCurrentOrg] = useState<Organization>(MOCK_ORGANIZATIONS[0])
+  const [currentOrg, setCurrentOrg] = useState<Organization>(MOCK_ORGANIZATIONS[0]!)
 
   return (
     <SidebarMenu>
@@ -106,7 +107,7 @@ export function NavUser() {
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+              <div className="flex items-center gap-2 px-2 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8">
                   <AvatarImage src={USER_DATA.avatar} alt={USER_DATA.name} />
                   <AvatarFallback>JD</AvatarFallback>
@@ -119,20 +120,19 @@ export function NavUser() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             
-            {/* Current Organization Display */}
-            <DropdownMenuLabel className="px-2 py-1.5 text-xs text-muted-foreground">
+            <DropdownMenuLabel className="px-2 py-1 text-xs text-muted-foreground">
               Current Organization
             </DropdownMenuLabel>
-            <DropdownMenuItem className="px-2 py-1.5 focus:bg-transparent cursor-default">
-              <div className="flex items-center gap-2 w-full">
+            <div className="px-2 py-1">
+              <div className="flex items-center gap-2 rounded-md bg-muted p-1.5">
                 {currentOrg.logo ? (
                   <Avatar className="h-6 w-6">
                     <AvatarImage src={currentOrg.logo} alt={currentOrg.name} />
                     <AvatarFallback>{currentOrg.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ) : (
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted">
-                    <Building className="h-3 w-3" />
+                  <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
+                    <Building className="h-3.5 w-3.5 text-primary" />
                   </div>
                 )}
                 <div className="flex flex-col">
@@ -140,56 +140,63 @@ export function NavUser() {
                   <span className="text-xs text-muted-foreground">{currentOrg.role}</span>
                 </div>
               </div>
-            </DropdownMenuItem>
+            </div>
             
-            {/* Organizations Sub Menu */}
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger className="px-2 py-1.5">
-                <Users className="mr-2 h-4 w-4" />
-                <span>Switch Organization</span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuSubContent className="min-w-[220px]">
-                <DropdownMenuRadioGroup 
-                  value={currentOrg.id} 
-                  onValueChange={(id) => {
-                    const org = MOCK_ORGANIZATIONS.find(o => o.id === id);
-                    if (org) setCurrentOrg(org);
-                  }}
-                >
-                  {MOCK_ORGANIZATIONS.map((org) => (
-                    <DropdownMenuRadioItem 
-                      key={org.id} 
-                      value={org.id}
-                      className="py-1.5 cursor-pointer"
+            <DropdownMenuItem asChild className="px-2 py-1.5 my-1">
+              <div className="flex w-full cursor-pointer items-center justify-between">
+                <div className="flex items-center">
+                  <Users className="mr-2 h-4 w-4" />
+                  <span>Switch Organization</span>
+                </div>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger className="h-0 w-0 p-0">
+                    <span className="sr-only">Open</span>
+                  </DropdownMenuSubTrigger>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground" />
+                  <DropdownMenuSubContent className="min-w-[220px]">
+                    <DropdownMenuRadioGroup 
+                      value={currentOrg.id} 
+                      onValueChange={(id) => {
+                        const org = MOCK_ORGANIZATIONS.find(o => o.id === id);
+                        if (org) setCurrentOrg(org);
+                      }}
                     >
-                      <div className="flex items-center gap-2">
-                        {org.logo ? (
-                          <Avatar className="h-6 w-6">
-                            <AvatarImage src={org.logo} alt={org.name} />
-                            <AvatarFallback>{org.name.substring(0, 2)}</AvatarFallback>
-                          </Avatar>
-                        ) : (
-                          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-muted">
-                            <Building className="h-3 w-3" />
+                      {MOCK_ORGANIZATIONS.map((org) => (
+                        <DropdownMenuRadioItem 
+                          key={org.id} 
+                          value={org.id}
+                          className="py-1.5 cursor-pointer"
+                        >
+                          <div className="flex items-center gap-2">
+                            {org.logo ? (
+                              <Avatar className="h-6 w-6">
+                                <AvatarImage src={org.logo} alt={org.name} />
+                                <AvatarFallback>{org.name.substring(0, 2)}</AvatarFallback>
+                              </Avatar>
+                            ) : (
+                              <div className="flex h-6 w-6 items-center justify-center rounded-md bg-primary/10">
+                                <Building className="h-3.5 w-3.5 text-primary" />
+                              </div>
+                            )}
+                            <div className="flex flex-col">
+                              <span className="text-sm font-medium">{org.name}</span>
+                              <span className="text-xs text-muted-foreground">{org.role}</span>
+                            </div>
                           </div>
-                        )}
-                        <div className="flex flex-col">
-                          <span className="text-sm font-medium">{org.name}</span>
-                          <span className="text-xs text-muted-foreground">{org.role}</span>
-                        </div>
-                      </div>
-                    </DropdownMenuRadioItem>
-                  ))}
-                </DropdownMenuRadioGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link href="/organizations/new" className="flex w-full items-center cursor-pointer">
-                    <Plus className="mr-2 h-4 w-4" />
-                    <span>Create Organization</span>
-                  </Link>
-                </DropdownMenuItem>
-              </DropdownMenuSubContent>
-            </DropdownMenuSub>
+                        </DropdownMenuRadioItem>
+                      ))}
+                    </DropdownMenuRadioGroup>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem asChild>
+                      <Link href="/organizations/new" className="flex w-full items-center cursor-pointer">
+                        <Plus className="mr-2 h-4 w-4" />
+                        <span>Create Organization</span>
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuSubContent>
+                </DropdownMenuSub>
+              </div>
+            </DropdownMenuItem>
             
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
