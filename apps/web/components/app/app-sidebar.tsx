@@ -53,7 +53,7 @@ function NavContent() {
       <SidebarGroup>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip='Dashboard'>
               <Link href='/'>
                 <LayoutDashboard className='h-4 w-4' />
                 <span>Dashboard</span>
@@ -62,7 +62,7 @@ function NavContent() {
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip='Published Posts'>
               <Link href='/posts' passHref>
                 <BookOpen className='h-4 w-4' />
                 <span>Published Posts</span>
@@ -71,7 +71,7 @@ function NavContent() {
           </SidebarMenuItem>
 
           <SidebarMenuItem>
-            <SidebarMenuButton asChild>
+            <SidebarMenuButton asChild tooltip='Drafts'>
               <Link href='/drafts' passHref>
                 <FileEdit className='h-4 w-4' />
                 <span>Drafts</span>
@@ -87,7 +87,10 @@ function NavContent() {
               className='w-full'
             >
               <CollapsibleTrigger asChild>
-                <SidebarMenuButton className='w-full justify-between gap-2'>
+                <SidebarMenuButton
+                  className='w-full justify-between gap-2'
+                  tooltip='Categories'
+                >
                   <div className='flex items-center gap-2'>
                     <Tag className='h-4 w-4' />
                     <span>Categories</span>
@@ -101,10 +104,13 @@ function NavContent() {
               </CollapsibleTrigger>
               <CollapsibleContent className='pl-2'>
                 {MOCK_CATEGORIES.map((category) => (
-                  <SidebarMenuButton asChild className='w-full justify-between text-sm mt-1'>
-                      <Link
-                        key={category.id}
-                        href={`/categories/${category.id}`}
+                  <SidebarMenuButton
+                    asChild
+                    className='w-full justify-between text-sm mt-1'
+                  >
+                    <Link
+                      key={category.id}
+                      href={`/categories/${category.id}`}
                       passHref
                     >
                       <span className='truncate'>{category.name}</span>
@@ -132,29 +138,35 @@ function NavContent() {
 // NewPostButton component for the header
 function NewPostButton() {
   return (
-    <Button className='w-full justify-start gap-2 mt-4' asChild>
-      <Link href='/posts/new'>
-        <PlusCircle className='h-4 w-4' />
-        New Post
-      </Link>
-    </Button>
+    <SidebarGroup>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton asChild tooltip='New Post'>
+            <Link href='/posts/new'>
+              <PlusCircle className='h-4 w-4' />
+              New Post
+            </Link>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    </SidebarGroup>
   );
 }
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
   return (
-      <Sidebar collapsible='icon' {...props}>
-        <SidebarHeader>
-          <SiteSwitcher />
-          <NewPostButton />
-        </SidebarHeader>
-        <SidebarContent>
-          <NavContent />
-        </SidebarContent>
-        <SidebarFooter>
-          <NavUser />
-        </SidebarFooter>
-        <SidebarRail />
-      </Sidebar>
+    <Sidebar collapsible='icon' {...props}>
+      <SidebarHeader>
+        <SiteSwitcher />
+      </SidebarHeader>
+      <SidebarContent>
+        <NewPostButton />
+        <NavContent />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser />
+      </SidebarFooter>
+      <SidebarRail />
+    </Sidebar>
   );
 }
