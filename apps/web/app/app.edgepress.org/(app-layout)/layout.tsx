@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { AppHeader } from "@/components/app/app-header";
 import { AppSidebar } from "@/components/app/app-sidebar";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
@@ -10,7 +10,6 @@ export default function AppLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // 為了響應式設計，在移動設備上使用抽屜式側邊欄
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
 

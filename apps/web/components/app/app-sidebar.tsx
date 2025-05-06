@@ -143,7 +143,6 @@ function NewPostButton() {
 
 export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
   return (
-    <SidebarProvider>
       <Sidebar collapsible='icon' {...props}>
         <SidebarHeader className='p-4 space-y-2'>
           <SiteSwitcher />
@@ -157,6 +156,5 @@ export function AppSidebar({...props}: React.ComponentProps<typeof Sidebar>) {
         </SidebarFooter>
         <SidebarRail />
       </Sidebar>
-    </SidebarProvider>
   );
 }
