@@ -1,5 +1,5 @@
-// import { parse } from "@repo/utils/middleware";
-// import { prismaEdge } from "@repo/prisma/edge";
+// import { parse } from "@edgepress/utils/middleware";
+// import { prismaEdge } from "@edgepress/prisma/edge";
 import { NextRequest, NextResponse } from "next/server";
 // import { getUserViaToken } from "./utils/get-user-via-token";
 
