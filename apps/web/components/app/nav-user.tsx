@@ -9,7 +9,6 @@ import {
   Building,
   Plus,
   Users,
-  ChevronRight,
 } from "lucide-react"
 
 import {
@@ -144,8 +143,8 @@ export function NavUser() {
             </div>
             
             <DropdownMenuSub>
-              <DropdownMenuSubTrigger className="px-2 py-1.5 my-1 cursor-pointer">
-                <div className="flex items-center">
+              <DropdownMenuSubTrigger className="cursor-pointer">
+                <div className="flex items-center gap-2">
                   <Users className="mr-2 h-4 w-4" />
                   <span>Switch Organization</span>
                 </div>
