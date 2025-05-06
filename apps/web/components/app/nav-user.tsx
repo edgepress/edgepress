@@ -149,7 +149,6 @@ export function NavUser() {
                   <Users className="mr-2 h-4 w-4" />
                   <span>Switch Organization</span>
                 </div>
-                <ChevronRight className="ml-auto h-4 w-4 text-muted-foreground" />
               </DropdownMenuSubTrigger>
               <DropdownMenuSubContent className="min-w-[220px]">
                 <DropdownMenuRadioGroup 
