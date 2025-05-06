@@ -2,7 +2,6 @@
 
 import React, { useState } from "react"
 import { Globe, ChevronsUpDown, Check, Plus } from "lucide-react"
-
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -33,6 +32,11 @@ interface Site {
 export function SiteSwitcher() {
   const { isMobile } = useSidebar()
   const [currentSite, setCurrentSite] = useState<Site>(MOCK_SITES[0] as Site);
+
+  if (!MOCK_SITES.length) {
+    return null;
+  }
+
 
   return (
     <SidebarMenu>
