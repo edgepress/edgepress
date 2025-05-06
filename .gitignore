@@ -38,4 +38,4 @@ yarn-error.log*
 *.pem
 
 # Generated
-/packages/generated/prisma
+/packages/prisma/generated/prisma

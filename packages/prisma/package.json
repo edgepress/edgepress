@@ -1,5 +1,5 @@
 {
-  "name": "@repo/prisma",
+  "name": "@edgepress/prisma",
   "version": "0.0.0",
   "scripts": {
     "db:generate": "prisma generate",
@@ -9,14 +9,14 @@
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "prisma": "^6.6.0"
+    "prisma": "^6.7.0"
   },
   "dependencies": {
     "@planetscale/database": "^1.19.0",
     "@prisma/adapter-planetscale": "^6.6.0",
-    "@prisma/client": "^6.6.0"
+    "@prisma/client": "^6.7.0"
   },
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.ts"
   }
 }
