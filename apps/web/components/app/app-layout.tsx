@@ -14,7 +14,6 @@ import { Separator } from "@/components/ui/separator";
 import {
   SidebarInset,
   SidebarTrigger,
-  SidebarProvider
 } from "@/components/ui/sidebar";
 
 interface AppLayoutProps {
@@ -28,7 +27,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children, title, breadcrumbs = [] }: AppLayoutProps) {
   return (
-    
+    <>
         <AppSidebar />
         <SidebarInset>
           <header className='flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
@@ -67,7 +66,7 @@ export function AppLayout({ children, title, breadcrumbs = [] }: AppLayoutProps)
           </header>
           <main className='flex flex-1 flex-col gap-4 p-4'>{children}</main>
         </SidebarInset>
-      </SidebarProvider>
+      </>
     
   );
 } 
