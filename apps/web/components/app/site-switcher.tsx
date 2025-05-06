@@ -40,58 +40,60 @@ export function SiteSwitcher() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              size='lg'
+              className='data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground'
             >
-              <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                <Globe className="size-4" />
+              <div className='flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground'>
+                <Globe className='size-4' />
               </div>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
+              <div className='grid flex-1 text-left text-sm leading-tight'>
+                <span className='truncate font-semibold'>
                   {currentSite.name}
                 </span>
-                <span className="truncate text-xs text-muted-foreground">
+                <span className='truncate text-xs text-muted-foreground'>
                   {currentSite.domain}
                 </span>
               </div>
-              <ChevronsUpDown className="ml-auto size-4" />
+              <ChevronsUpDown className='ml-auto size-4' />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            align="start"
-            side={isMobile ? "bottom" : "right"}
+            className='w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg'
+            align='start'
+            side={isMobile ? 'bottom' : 'right'}
             sideOffset={4}
           >
-            <DropdownMenuLabel className="text-xs text-muted-foreground">
+            <DropdownMenuLabel className='text-xs text-muted-foreground'>
               站點列表
             </DropdownMenuLabel>
             {MOCK_SITES.map((site) => (
               <DropdownMenuItem
                 key={site.id}
                 onClick={() => setCurrentSite(site)}
-                className="gap-2 p-2"
+                className='gap-2 p-2'
               >
-                <div className="flex items-center gap-2 truncate">
-                  <span className="truncate">{site.name}</span>
+                <div className='flex items-center gap-2 truncate'>
+                  <span className='truncate'>{site.name}</span>
                 </div>
                 {currentSite.id === site.id && (
-                  <Check className="ml-auto size-4 text-primary flex-shrink-0" />
+                  <Check className='ml-auto size-4 text-primary flex-shrink-0' />
                 )}
               </DropdownMenuItem>
             ))}
             <DropdownMenuSeparator />
-            <DropdownMenuItem asChild className="gap-2 p-2">
-              <Link href="/sites/new" className="flex items-center gap-2">
-                <div className="flex size-6 items-center justify-center rounded-md border bg-background">
-                  <Plus className="size-4" />
+            <DropdownMenuItem asChild className='gap-2 p-2'>
+              <Link href='/sites/new' className='flex items-center gap-2'>
+                <div className='flex size-6 items-center justify-center rounded-md border bg-background'>
+                  <Plus className='size-4' />
                 </div>
-                <div className="font-medium text-muted-foreground">新增站點</div>
+                <div className='font-medium text-muted-foreground'>
+                  新增站點
+                </div>
               </Link>
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 } 
