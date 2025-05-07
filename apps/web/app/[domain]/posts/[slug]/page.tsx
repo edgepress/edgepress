@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-// 這個 interface 定義了文章的結構
 interface Post {
   slug: string;
   title: string;
@@ -19,7 +18,6 @@ interface Post {
   tags: string[];
 }
 
-// 模擬文章數據，在實際應用中會從 API 或數據庫獲取
 const posts: Record<string, Post> = {
   'featured-post': {
     slug: 'featured-post',
@@ -261,33 +259,32 @@ const posts: Record<string, Post> = {
   }
 };
 
-// 根據 slug 獲取文章數據
 function getPostBySlug(slug: string) {
   return posts[slug];
 }
 
-// 獲取相關文章
 function getRelatedPosts(currentSlug: string, tags: string[], limit: number = 2) {
-  // 排除當前文章並根據標籤找到相關文章
   return Object.values(posts)
     .filter(post => post.slug !== currentSlug && post.tags.some(tag => tags.includes(tag)))
     .slice(0, limit);
 }
 
-export default function PostPage({ params }: { params: { slug: string } }) {
-  const post = getPostBySlug(params.slug);
+export default async function PostPage({
+  params,
+}: {
+  params: Promise<{ slug: string; domain: string }>;
+}) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
   
-  // 如果找不到文章，返回 404
   if (!post) {
     notFound();
   }
   
-  // 獲取相關文章
   const relatedPosts = getRelatedPosts(post.slug, post.tags);
   
   return (
     <div className="container mx-auto px-4 py-8 max-w-4xl">
-      {/* 文章頭部 */}
       <header className="mb-10">
         <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
           <span>{post.publishedAt}</span>
