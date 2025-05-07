@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
-export const runtime = 'edge';
+export async function generateStaticParams() {
+  return [];
+}
 
 const topics = [
   { name: 'Edge Computing', slug: 'edge-computing', count: 1 },

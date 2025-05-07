@@ -2,8 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {notFound} from 'next/navigation';
 
-export const runtime = 'edge';
-
 interface Post {
   slug: string;
   title: string;
@@ -280,6 +278,10 @@ function getRelatedPosts(
         post.slug !== currentSlug && post.tags.some((tag) => tags.includes(tag))
     )
     .slice(0, limit);
+}
+
+export async function generateStaticParams() {
+  return [];
 }
 
 export default async function PostPage({

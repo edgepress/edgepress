@@ -1,7 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-export const runtime = 'edge';
+export async function generateStaticParams() {
+  return [];
+}
+
 
 const topicPosts = {
   'edge-computing': [
