@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { notFound } from 'next/navigation';
+import {notFound} from 'next/navigation';
 
 export const runtime = 'edge';
 
@@ -24,7 +24,8 @@ const posts: Record<string, Post> = {
   'featured-post': {
     slug: 'featured-post',
     title: 'The Future of Content Management in the Edge Computing Era',
-    excerpt: 'Explore how edge computing is transforming the way we create, manage, and distribute content across the web.',
+    excerpt:
+      'Explore how edge computing is transforming the way we create, manage, and distribute content across the web.',
     content: `
       <p>Edge computing is revolutionizing the way we think about content management systems (CMS). Traditional CMSes were built around the idea of centralized servers that store, process, and deliver content to end users. But as the web becomes more complex, and user expectations for performance continue to rise, this model is showing its limitations.</p>
       
@@ -69,14 +70,15 @@ const posts: Record<string, Post> = {
     author: {
       name: 'Alex Chen',
       avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce',
-      role: 'CTO, EdgePress'
+      role: 'CTO, EdgePress',
     },
-    tags: ['Edge Computing', 'Content Strategy', 'Performance']
+    tags: ['Edge Computing', 'Content Strategy', 'Performance'],
   },
   'collaborative-editing': {
     slug: 'collaborative-editing',
     title: 'Building Real-time Collaborative Editing Tools',
-    excerpt: 'A deep dive into the technology behind real-time collaborative content editing.',
+    excerpt:
+      'A deep dive into the technology behind real-time collaborative content editing.',
     content: `
       <p>Real-time collaborative editing has transformed the way teams work together. Google Docs led the way, showing that multiple people could simultaneously edit a document without conflicts. Now, this capability is becoming an expected feature in content management systems.</p>
 
@@ -115,14 +117,15 @@ const posts: Record<string, Post> = {
     author: {
       name: 'Sarah Johnson',
       avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
-      role: 'Lead Developer, EdgePress'
+      role: 'Lead Developer, EdgePress',
     },
-    tags: ['Collaboration', 'Development', 'Real-time']
+    tags: ['Collaboration', 'Development', 'Real-time'],
   },
   'responsive-design': {
     slug: 'responsive-design',
     title: 'Responsive Design Patterns for Modern Web Apps',
-    excerpt: 'Exploring effective responsive design strategies for content-heavy applications.',
+    excerpt:
+      'Exploring effective responsive design strategies for content-heavy applications.',
     content: `
       <p>Responsive design has evolved significantly since Ethan Marcotte first coined the term in 2010. While the core principles remain the same—fluid grids, flexible images, and media queries—today's web applications demand more sophisticated approaches to create truly device-agnostic experiences.</p>
 
@@ -180,14 +183,15 @@ const posts: Record<string, Post> = {
     author: {
       name: 'Miguel Rodriguez',
       avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
-      role: 'Design Lead, EdgePress'
+      role: 'Design Lead, EdgePress',
     },
-    tags: ['Design', 'UI/UX', 'Mobile']
+    tags: ['Design', 'UI/UX', 'Mobile'],
   },
   'performance-optimization': {
     slug: 'performance-optimization',
     title: 'Performance Optimization for Content Delivery',
-    excerpt: 'Tips and tricks to optimize your content delivery for lightning-fast performance.',
+    excerpt:
+      'Tips and tricks to optimize your content delivery for lightning-fast performance.',
     content: `
       <p>Web performance is not just a technical concern—it's a critical business metric that directly impacts user engagement, conversion rates, and search engine rankings. For content-heavy websites, optimizing performance requires a holistic approach that addresses every aspect of the content delivery pipeline.</p>
 
@@ -255,150 +259,173 @@ const posts: Record<string, Post> = {
     author: {
       name: 'Lisa Chen',
       avatar: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f',
-      role: 'Performance Engineer, EdgePress'
+      role: 'Performance Engineer, EdgePress',
     },
-    tags: ['Performance', 'Optimization', 'Development']
-  }
+    tags: ['Performance', 'Optimization', 'Development'],
+  },
 };
 
 function getPostBySlug(slug: string) {
   return posts[slug];
 }
 
-function getRelatedPosts(currentSlug: string, tags: string[], limit: number = 2) {
+function getRelatedPosts(
+  currentSlug: string,
+  tags: string[],
+  limit: number = 2
+) {
   return Object.values(posts)
-    .filter(post => post.slug !== currentSlug && post.tags.some(tag => tags.includes(tag)))
+    .filter(
+      (post) =>
+        post.slug !== currentSlug && post.tags.some((tag) => tags.includes(tag))
+    )
     .slice(0, limit);
 }
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string; }>;
+  params: Promise<{slug: string}>;
 }) {
-  const { slug } = await params;
+  const {slug} = await params;
   const post = getPostBySlug(slug);
-  
+
   if (!post) {
     notFound();
   }
-  
+
   const relatedPosts = getRelatedPosts(post.slug, post.tags);
-  
+
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      <header className="mb-10">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
+    <div className='container mx-auto px-4 py-8 max-w-4xl'>
+      <header className='mb-10'>
+        <div className='flex items-center gap-2 text-sm text-muted-foreground mb-4'>
           <span>{post.publishedAt}</span>
           <span>•</span>
           <span>{post.readingTime}</span>
           <span>•</span>
-          <div className="flex gap-2">
-            {post.tags.map(tag => (
-              <Link 
-                key={tag} 
+          <div className='flex gap-2'>
+            {post.tags.map((tag) => (
+              <Link
+                key={tag}
                 href={`/topics/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                className="hover:text-primary"
+                className='hover:text-primary'
               >
                 {tag}
               </Link>
             ))}
           </div>
         </div>
-        
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">{post.title}</h1>
-        <p className="text-xl text-muted-foreground mb-6">{post.excerpt}</p>
-        
-        {/* 作者信息 */}
-        <div className="flex items-center gap-4">
-          <div className="w-12 h-12 rounded-full overflow-hidden relative">
-            <Image 
-              src={post.author.avatar} 
-              alt={post.author.name} 
+
+        <h1 className='text-3xl md:text-4xl lg:text-5xl font-bold mb-6'>
+          {post.title}
+        </h1>
+        <p className='text-xl text-muted-foreground mb-6'>{post.excerpt}</p>
+
+        <div className='flex items-center gap-4'>
+          <div className='w-12 h-12 rounded-full overflow-hidden relative'>
+            <Image
+              src={post.author.avatar}
+              alt={post.author.name}
               fill
-              className="object-cover"
+              className='object-cover'
             />
           </div>
           <div>
-            <div className="font-medium">{post.author.name}</div>
-            <div className="text-sm text-muted-foreground">{post.author.role}</div>
+            <div className='font-medium'>{post.author.name}</div>
+            <div className='text-sm text-muted-foreground'>
+              {post.author.role}
+            </div>
           </div>
         </div>
       </header>
-      
-      {/* 文章特色圖片 */}
-      <div className="rounded-xl overflow-hidden w-full h-72 md:h-96 relative mb-10">
-        <Image 
-          src={post.coverImage} 
-          alt={post.title} 
+
+      <div className='rounded-xl overflow-hidden w-full h-72 md:h-96 relative mb-10'>
+        <Image
+          src={post.coverImage}
+          alt={post.title}
           fill
-          className="object-cover"
+          className='object-cover'
           priority
         />
       </div>
-      
-      {/* 文章內容 */}
-      <article className="prose prose-lg max-w-none mb-16">
-        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+
+      <article className='prose prose-lg max-w-none mb-16'>
+        <div dangerouslySetInnerHTML={{__html: post.content}} />
       </article>
-      
-      {/* 標籤 */}
-      <div className="mb-16">
-        <h3 className="text-lg font-medium mb-4">Topics</h3>
-        <div className="flex flex-wrap gap-2">
-          {post.tags.map(tag => (
-            <Link 
-              key={tag} 
+
+      <div className='mb-16'>
+        <h3 className='text-lg font-medium mb-4'>Topics</h3>
+        <div className='flex flex-wrap gap-2'>
+          {post.tags.map((tag) => (
+            <Link
+              key={tag}
               href={`/topics/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-              className="px-4 py-2 bg-muted text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
+              className='px-4 py-2 bg-muted text-sm rounded-full hover:bg-primary hover:text-primary-foreground transition-colors'
             >
               {tag}
             </Link>
           ))}
         </div>
       </div>
-      
-      {/* 相關文章 */}
-      {relatedPosts.length > 0 && (
-        <section className="mb-12">
-          <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
-          <div className="grid gap-8 md:grid-cols-2">
-            {relatedPosts.map(related => (
-              <article key={related.slug} className="bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow">
-                <div className="h-48 relative">
-                  <Image 
-                    src={related.coverImage} 
-                    alt={related.title} 
-                    fill
-                    className="object-cover"
-                  />
+
+      <section className='mb-12'>
+        <h2 className='text-2xl font-bold mb-6'>Related Articles</h2>
+        <div className='grid gap-8 md:grid-cols-2'>
+          {relatedPosts.map((related) => (
+            <article
+              key={related.slug}
+              className='bg-card rounded-lg overflow-hidden shadow-sm border border-border hover:shadow-md transition-shadow'
+            >
+              <div className='h-48 relative'>
+                <Image
+                  src={related.coverImage}
+                  alt={related.title}
+                  fill
+                  className='object-cover'
+                />
+              </div>
+              <div className='p-5'>
+                <div className='text-sm text-muted-foreground mb-2'>
+                  {related.publishedAt} • {related.readingTime}
                 </div>
-                <div className="p-5">
-                  <div className="text-sm text-muted-foreground mb-2">{related.publishedAt} • {related.readingTime}</div>
-                  <h3 className="text-xl font-bold mb-3">
-                    <Link href={`/posts/${related.slug}`} className="hover:text-primary">
-                      {related.title}
-                    </Link>
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {related.excerpt}
-                  </p>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      )}
-      
-      {/* 返回按鈕 */}
-      <div className="border-t pt-8">
-        <Link href="/" className="flex items-center text-muted-foreground hover:text-primary">
-          <svg xmlns="http://www.w3.org/2000/svg" className="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                <h3 className='text-xl font-bold mb-3'>
+                  <Link
+                    href={`/posts/${related.slug}`}
+                    className='hover:text-primary'
+                  >
+                    {related.title}
+                  </Link>
+                </h3>
+                <p className='text-muted-foreground mb-4'>{related.excerpt}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <div className='border-t pt-8'>
+        <Link
+          href={`/posts`}
+          className='flex items-center text-muted-foreground hover:text-primary'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            className='mr-2 h-4 w-4'
+            fill='none'
+            viewBox='0 0 24 24'
+            stroke='currentColor'
+          >
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M10 19l-7-7m0 0l7-7m-7 7h18'
+            />
           </svg>
           Back to all posts
         </Link>
       </div>
     </div>
   );
-} 
+}
