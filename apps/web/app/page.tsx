@@ -3,6 +3,11 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function DevHomePage() {
+
+  if (process.env.VERCEL_ENV === 'production') {
+    return <div>Not found</div>;
+  }
+
   return (
     <div className="container mx-auto p-8 max-w-6xl">
       <header className="mb-8 pb-4 border-b">

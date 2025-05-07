@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-// 模擬從 API 獲取文章列表
+export const runtime = 'edge';
+
 const posts = [
   {
     slug: 'featured-post',

@@ -24,8 +24,10 @@ export default async function middleware(request: NextRequest) {
   if (host.startsWith('localhost')) {
     return NextResponse.next();
   }
+
   const isAdminHost = ADMIN_HOSTNAMES.has(host);
   const isAppHost = APP_HOSTNAMES.has(host);
+
   if (isAdminHost) {
     return AdminMiddleware(request);
   }
@@ -35,6 +37,4 @@ export default async function middleware(request: NextRequest) {
   }
 
   return SiteMiddleware(request);
-
-  // return NextResponse.next();
 }

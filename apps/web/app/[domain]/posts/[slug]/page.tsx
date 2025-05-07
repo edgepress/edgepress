@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+export const runtime = 'edge';
+
 interface Post {
   slug: string;
   title: string;
@@ -272,7 +274,7 @@ function getRelatedPosts(currentSlug: string, tags: string[], limit: number = 2)
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string; domain: string }>;
+  params: Promise<{ slug: string; }>;
 }) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
