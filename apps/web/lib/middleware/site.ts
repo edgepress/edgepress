@@ -5,6 +5,7 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export default async function SiteMiddleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+  const domain = req.headers.get('x-forwarded-host') || req.headers.get('host');
 
   // const user = await getUserViaToken(req);
 
@@ -27,6 +28,6 @@ export default async function SiteMiddleware(req: NextRequest) {
   // }
 
   return NextResponse.rewrite(
-    new URL(`/[domain]${pathname === '/' ? '' : pathname}`, req.url)
+    new URL(`/${domain}${pathname === '/' ? '' : pathname}`, req.url)
   );
 }

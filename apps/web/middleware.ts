@@ -16,11 +16,12 @@ export const config = {
   ],
 };
 export default async function middleware(request: NextRequest) {
-  const host = request.headers.get('host') as string;
+  const host = request.headers.get('x-forwarded-host') || request.headers.get('host') as string;
 
   if (!host) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
+  
   if (host.startsWith('localhost')) {
     return NextResponse.next();
   }
