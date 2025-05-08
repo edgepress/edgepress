@@ -1,7 +1,5 @@
-'use client';
-
-import React, {ReactNode} from 'react';
-import {AppSidebar} from '@/components/app/app-sidebar';
+import React, { ReactNode } from 'react';
+import { AppSidebar } from '@/components/app/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,14 +17,18 @@ import {
 
 interface AppLayoutProps {
   children: ReactNode;
-  title?: string;
-  breadcrumbs?: Array<{
-    title: string;
-    href?: string;
+  params: Promise<{
+    title?: string;
+    breadcrumbs?: Array<{
+      title: string;
+      href?: string;
+    }>;
   }>;
 }
 
-export default function AppLayout({children, title, breadcrumbs = []}: AppLayoutProps) {
+export default async function AppLayout({children, params}: AppLayoutProps) {
+  const { title, breadcrumbs } = await params;
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -37,7 +39,7 @@ export default function AppLayout({children, title, breadcrumbs = []}: AppLayout
             <Separator orientation='vertical' className='mr-2 h-4' />
             <Breadcrumb>
               <BreadcrumbList>
-                {breadcrumbs.map((item, index) => (
+                {breadcrumbs?.map((item, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && (
                       <BreadcrumbSeparator className='hidden md:block' />
@@ -55,7 +57,7 @@ export default function AppLayout({children, title, breadcrumbs = []}: AppLayout
                 ))}
                 {title && (
                   <>
-                    {breadcrumbs.length > 0 && <BreadcrumbSeparator />}
+                    {breadcrumbs && breadcrumbs.length > 0 && <BreadcrumbSeparator />}
                     <BreadcrumbItem>
                       <BreadcrumbPage>{title}</BreadcrumbPage>
                     </BreadcrumbItem>
