@@ -97,7 +97,7 @@ export default function NewPostPage() {
             />
           </div>
           
-          <DynamicPostEditor onChange={setContent} />
+          <DynamicPostEditor onChange={setContent} locale="zh-TW" />
         </div>
         
         <div className="space-y-4">
