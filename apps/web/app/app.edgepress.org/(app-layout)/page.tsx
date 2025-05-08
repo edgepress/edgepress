@@ -4,7 +4,6 @@ import { StatsCard } from "@/components/app/stats-card";
 import { PostList } from "@/components/app/article-list";
 import { 
   FileText, 
-  FileEdit, 
   Eye, 
   ThumbsUp 
 } from "lucide-react";
