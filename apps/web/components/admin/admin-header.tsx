@@ -14,7 +14,7 @@ export function AdminHeader() {
   return (
     <header className="h-14 px-4 border-b flex items-center justify-between bg-background">
       <div className="flex items-center gap-4">
-        <Link href="/admin.edgepress.org" className="font-semibold text-lg">
+        <Link href="/" className="font-semibold text-lg">
           EdgePress Admin
         </Link>
       </div>
@@ -39,10 +39,10 @@ export function AdminHeader() {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link href="/admin.edgepress.org/dashboard">Dashboard</Link>
+              <Link href="/">Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <Link href="/admin.edgepress.org/settings">Settings</Link>
+              <Link href="/settings">Settings</Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
