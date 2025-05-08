@@ -1,7 +1,5 @@
-'use client';
-
-import React, {ReactNode} from 'react';
-import {AdminSidebar} from "@/components/admin/admin-sidebar";
+import React, { ReactNode } from 'react';
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,18 +17,21 @@ import {
 
 interface AdminLayoutProps {
   children: ReactNode;
-  title?: string;
-  breadcrumbs?: Array<{
-    title: string;
-    href?: string;
+  params: Promise<{
+    title?: string;
+    breadcrumbs?: Array<{
+      title: string;
+      href?: string;
+    }>;
   }>;
 }
 
-export default function AdminLayout({
+export default async function AdminLayout({
   children,
-  title,
-  breadcrumbs = [],
+  params
 }: AdminLayoutProps) {
+  const { title, breadcrumbs } = await params;
+
   return (
     <SidebarProvider>
       <AdminSidebar />
@@ -41,7 +42,7 @@ export default function AdminLayout({
             <Separator orientation='vertical' className='mr-2 h-4' />
             <Breadcrumb>
               <BreadcrumbList>
-                {breadcrumbs.map((item, index) => (
+                {breadcrumbs?.map((item, index) => (
                   <React.Fragment key={index}>
                     {index > 0 && (
                       <BreadcrumbSeparator className='hidden md:block' />
@@ -59,7 +60,7 @@ export default function AdminLayout({
                 ))}
                 {title && (
                   <>
-                    {breadcrumbs.length > 0 && <BreadcrumbSeparator />}
+                    {breadcrumbs && breadcrumbs.length > 0 && <BreadcrumbSeparator />}
                     <BreadcrumbItem>
                       <BreadcrumbPage>{title}</BreadcrumbPage>
                     </BreadcrumbItem>
