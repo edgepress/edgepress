@@ -11,3 +11,9 @@ export const APP_HOSTNAMES = new Set([
   'app.localhost:3000',
   'app.edgepress.org',
 ]);
+
+export const CHECKOUT_HOSTNAMES = new Set([
+  `checkout.${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
+  'checkout.localhost:3000',
+  'checkout.edgepress.org',
+]);
