@@ -77,9 +77,12 @@ export function useLoadDictionary(locale: SupportedLocale = SUPPORTED_LOCALES.EN
       
       switch (localeCode) {
         case SUPPORTED_LOCALES.ZH:
-        case SUPPORTED_LOCALES.ZH_TW:
           const { zh } = await import("@blocknote/core/locales");
           dictionary = zh;
+          break;
+        case SUPPORTED_LOCALES.ZH_TW:
+          const { zhTW } = await import("@/lib/blocknote/zh-TW");
+          dictionary = zhTW;
           break;
         case SUPPORTED_LOCALES.JA:
           const { ja } = await import("@blocknote/core/locales");
