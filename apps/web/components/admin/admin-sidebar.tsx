@@ -53,7 +53,7 @@ function AdminNavContent() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip='Dashboard'>
-              <Link href='/admin.edgepress.org/dashboard'>
+              <Link href='/dashboard'>
                 <LayoutDashboard className='h-4 w-4' />
                 <span>System Dashboard</span>
               </Link>
@@ -96,7 +96,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/posts'>
+                  <Link href='/posts'>
                     <span className='truncate'>All Posts</span>
                   </Link>
                 </SidebarMenuButton>
@@ -104,7 +104,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/pages'>
+                  <Link href='/pages'>
                     <span className='truncate'>All Pages</span>
                     <LayoutGrid className='h-3.5 w-3.5' />
                   </Link>
@@ -113,7 +113,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/categories'>
+                  <Link href='/categories'>
                     <span className='truncate'>Categories</span>
                     <Tags className='h-3.5 w-3.5' />
                   </Link>
@@ -122,7 +122,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/comments'>
+                  <Link href='/comments'>
                     <span className='truncate'>Comments</span>
                     <MessageSquare className='h-3.5 w-3.5' />
                   </Link>
@@ -235,7 +235,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/settings/general'>
+                  <Link href='/settings/general'>
                     <span className='truncate'>General Settings</span>
                   </Link>
                 </SidebarMenuButton>
@@ -243,7 +243,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/settings/sites'>
+                  <Link href='/settings/sites'>
                     <span className='truncate'>Site Management</span>
                     <Globe className='h-3.5 w-3.5' />
                   </Link>
@@ -252,7 +252,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/settings/database'>
+                  <Link href='/settings/database'>
                     <span className='truncate'>Database Settings</span>
                     <Database className='h-3.5 w-3.5' />
                   </Link>
@@ -261,7 +261,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/settings/security'>
+                  <Link href='/settings/security'>
                     <span className='truncate'>Security Settings</span>
                     <ShieldAlert className='h-3.5 w-3.5' />
                   </Link>
@@ -270,7 +270,7 @@ function AdminNavContent() {
                   asChild
                   className='w-full justify-between text-sm mt-1'
                 >
-                  <Link href='/admin.edgepress.org/settings/logs'>
+                  <Link href='/settings/logs'>
                     <span className='truncate'>System Logs</span>
                     <GanttChart className='h-3.5 w-3.5' />
                   </Link>
