@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { ADMIN_HOSTNAMES, APP_HOSTNAMES } from '@/lib/constants';
-import { AdminMiddleware, AppMiddleware, SiteMiddleware } from '@/lib/middleware';
+import { parse } from '@/lib/middleware/utils/parse';
+import { ADMIN_HOSTNAMES, APP_HOSTNAMES, CHECKOUT_HOSTNAMES } from '@/lib/constants';
+import { AdminMiddleware, AppMiddleware, SiteMiddleware, CheckoutMiddleware } from '@/lib/middleware';
 
 export const config = {
   matcher: [
@@ -16,25 +17,29 @@ export const config = {
   ],
 };
 export default async function middleware(request: NextRequest) {
-  const host = request.headers.get('x-forwarded-host') || request.headers.get('host') as string;
+  const { domain, path } = parse(request);
 
-  if (!host) {
+  if (!domain) {
     return NextResponse.redirect(new URL('/home', request.url));
   }
   
-  if (host.startsWith('localhost')) {
+  if (domain.startsWith('localhost')) {
     return NextResponse.next();
   }
 
-  const isAdminHost = ADMIN_HOSTNAMES.has(host);
-  const isAppHost = APP_HOSTNAMES.has(host);
-
+  const isAdminHost = ADMIN_HOSTNAMES.has(domain);
+  const isAppHost = APP_HOSTNAMES.has(domain);
+  const isCheckoutHost = CHECKOUT_HOSTNAMES.has(domain);
   if (isAdminHost) {
     return AdminMiddleware(request);
   }
 
   if (isAppHost) {
     return AppMiddleware(request);
+  }
+
+  if (isCheckoutHost) {
+    return CheckoutMiddleware(request);
   }
 
   return SiteMiddleware(request);
