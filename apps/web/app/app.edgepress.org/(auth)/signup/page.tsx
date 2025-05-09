@@ -1,23 +1,35 @@
-import {authClient} from '@/lib/auth-client'; //import the auth client
+"use client";
 
-const {data, error} = await authClient.signUp.email(
-  {
-    email, // user email address
-    password, // user password -> min 8 characters by default
-    name, // user display name
-    image, // User image URL (optional)
-    callbackURL: '/dashboard', // A URL to redirect to after the user verifies their email (optional)
-  },
-  {
-    onRequest: (ctx) => {
-      //show loading
-    },
-    onSuccess: (ctx) => {
-      //redirect to the dashboard or sign in page
-    },
-    onError: (ctx) => {
-      // display the error message
-      alert(ctx.error.message);
-    },
-  }
-);
+import SignIn from "@/components/ui/auth/sign-in";
+import { SignUp } from "@/components/ui/auth/sign-up";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+
+import { authClient as client } from "@/lib/auth-client";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
+
+export default function Page() {
+	const router = useRouter();
+
+	return (
+		<div className="w-full">
+			<div className="flex items-center flex-col justify-center w-full md:py-10">
+				<div className="md:w-[400px]">
+					<Tabs defaultValue="sign-in">
+						<TabsList>
+							<TabsTrigger value="sign-in">Sign In</TabsTrigger>
+							<TabsTrigger value="sign-up">Sign Up</TabsTrigger>
+						</TabsList>
+						<TabsContent value="sign-in">
+							<SignIn />
+						</TabsContent>
+						<TabsContent value="sign-up">
+							<SignUp />
+						</TabsContent>
+					</Tabs>
+				</div>
+			</div>
+		</div>
+	);
+}
