@@ -21,8 +21,17 @@ export const config = {
 export default async function middleware(request: NextRequest) {
   const { 
     domain, 
-    // path 
+    path 
   } = parse(request);
+
+  console.log('domain', domain);
+  console.log('path', path);
+  console.log(path.includes('app.edgepress.org'));
+
+  if (path.includes('app.edgepress.org')) {
+    return NextResponse.redirect(new URL('/', 'http://app.localhost:3000'));
+  }
+
 
   if (!domain) {
     return NextResponse.redirect(new URL('/home', request.url));
@@ -35,6 +44,9 @@ export default async function middleware(request: NextRequest) {
   const isAdminHost = ADMIN_HOSTNAMES.has(domain);
   const isAppHost = APP_HOSTNAMES.has(domain);
   const isCheckoutHost = CHECKOUT_HOSTNAMES.has(domain);
+
+
+
   if (isAdminHost) {
     return AdminMiddleware(request);
   }
