@@ -24,14 +24,9 @@ export default async function middleware(request: NextRequest) {
     path 
   } = parse(request);
 
-  console.log('domain', domain);
-  console.log('path', path);
-  console.log(path.includes('app.edgepress.org'));
-
   if (path.includes('app.edgepress.org')) {
     return NextResponse.redirect(new URL('/', 'http://app.localhost:3000'));
   }
-
 
   if (!domain) {
     return NextResponse.redirect(new URL('/home', request.url));
