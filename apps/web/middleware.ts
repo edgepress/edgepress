@@ -1,8 +1,10 @@
-import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-import { parse } from '@/lib/middleware/utils/parse';
+
+import { NextResponse } from 'next/server';
+
 import { ADMIN_HOSTNAMES, APP_HOSTNAMES, CHECKOUT_HOSTNAMES } from '@/lib/constants';
-import { AdminMiddleware, AppMiddleware, SiteMiddleware, CheckoutMiddleware } from '@/lib/middleware';
+import { AdminMiddleware, AppMiddleware, CheckoutMiddleware, SiteMiddleware } from '@/lib/middleware';
+import { parse } from '@/lib/middleware/utils/parse';
 
 export const config = {
   matcher: [
@@ -17,7 +19,10 @@ export const config = {
   ],
 };
 export default async function middleware(request: NextRequest) {
-  const { domain, path } = parse(request);
+  const { 
+    domain, 
+    // path 
+  } = parse(request);
 
   if (!domain) {
     return NextResponse.redirect(new URL('/home', request.url));

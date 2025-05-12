@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { PostList } from "@/components/app/article-list";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
+
+import { PostList } from "@/components/app/article-list";
+import { Button } from "@/components/ui/button";
 
 export default function PostsPage() {
   return (

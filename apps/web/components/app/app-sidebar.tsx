@@ -1,17 +1,20 @@
 'use client';
 
 import React, {useState} from 'react';
-import Link from 'next/link';
-import {Button} from '@/components/ui/button';
+
 import {
-  LayoutDashboard,
-  FileEdit,
-  PlusCircle,
   BookOpen,
-  Tag,
   ChevronDown,
+  FileEdit,
   FolderPlus,
+  LayoutDashboard,
+  PlusCircle,
+  Tag,
 } from 'lucide-react';
+import Link from 'next/link';
+
+import {NavUser} from '@/components/app/nav-user';
+import {SiteSwitcher} from '@/components/app/site-switcher';
 import {Badge} from '@/components/ui/badge';
 import {
   Collapsible,
@@ -22,19 +25,13 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
   SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupContent,
+  SidebarHeader,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
-  SidebarSeparator,
-  SidebarProvider,
+  SidebarMenuItem,
+  SidebarRail,
 } from '@/components/ui/sidebar';
-import {NavUser} from '@/components/app/nav-user';
-import {SiteSwitcher} from '@/components/app/site-switcher';
 
 // Mock data for categories
 const MOCK_CATEGORIES = [
@@ -82,9 +79,9 @@ function NavContent() {
           {/* Categories Collapsible */}
           <SidebarMenuItem>
             <Collapsible
+              className='w-full'
               open={categoriesOpen}
               onOpenChange={setCategoriesOpen}
-              className='w-full'
             >
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton
@@ -105,6 +102,7 @@ function NavContent() {
               <CollapsibleContent className='pl-2'>
                 {MOCK_CATEGORIES.map((category) => (
                   <SidebarMenuButton
+                    key={category.id}
                     asChild
                     className='w-full justify-between text-sm mt-1'
                   >

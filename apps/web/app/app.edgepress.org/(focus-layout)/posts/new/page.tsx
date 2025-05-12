@@ -1,10 +1,15 @@
 "use client";
 
+
 import { useState } from "react";
+import {Toaster} from 'sonner';
+
+import {PlateEditor} from '@/components/editor/plate-editor';
+import {SettingsProvider} from '@/components/editor/settings';
+
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Save, Image, Tag, Clock, Check, ChevronsUpDown } from "lucide-react";
-import { DynamicPostEditor } from "@/components/app/post-editor";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import {
@@ -117,8 +122,13 @@ export default function NewPostPage() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </div>
+          <div className='h-screen w-full' data-registry='plate'>
+            <SettingsProvider>
+              <PlateEditor />
+            </SettingsProvider>
 
-          <DynamicPostEditor onChange={setContent} />
+            <Toaster />
+          </div>
         </div>
 
         <div className='space-y-4'>
@@ -165,7 +175,9 @@ export default function NewPostPage() {
                               key={c.value}
                               value={c.value}
                               onSelect={(currentValue) => {
-                                setCategory(currentValue === category ? "" : currentValue);
+                                setCategory(
+                                  currentValue === category ? '' : currentValue
+                                );
                                 setOpenCategoryPopover(false);
                               }}
                             >

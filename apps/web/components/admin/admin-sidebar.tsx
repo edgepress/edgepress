@@ -1,23 +1,24 @@
 'use client';
 
 import React, {useState} from 'react';
-import Link from "next/link";
+
 import { 
-  LayoutDashboard,
-  FileText, 
-  Users, 
-  Settings,
-  LayoutGrid,
-  Tags,
-  MessageSquare,
   ChevronDown,
-  PlusCircle,
+  Database, 
+  FileText, 
   GanttChart,
   Globe,
-  Database,
-  ShieldAlert
+  LayoutDashboard,
+  LayoutGrid,
+  MessageSquare,
+  Settings,
+  ShieldAlert,
+  Tags,
+  Users
 } from "lucide-react";
-import {Badge} from '@/components/ui/badge';
+import Link from "next/link";
+
+import {NavUser} from '@/components/app/nav-user';
 import {
   Collapsible,
   CollapsibleContent,
@@ -27,16 +28,15 @@ import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
-  SidebarHeader,
-  SidebarRail,
   SidebarGroup,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
-  SidebarMenuItem,
   SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
   SidebarSeparator,
 } from '@/components/ui/sidebar';
-import {NavUser} from '@/components/app/nav-user';
 
 // AdminNavContent component
 function AdminNavContent() {
@@ -71,9 +71,9 @@ function AdminNavContent() {
         <SidebarMenu>
           <SidebarMenuItem>
             <Collapsible
+              className='w-full'
               open={contentOpen}
               onOpenChange={setContentOpen}
-              className='w-full'
             >
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton
@@ -142,9 +142,9 @@ function AdminNavContent() {
         <SidebarMenu>
           <SidebarMenuItem>
             <Collapsible
+              className='w-full'
               open={usersOpen}
               onOpenChange={setUsersOpen}
-              className='w-full'
             >
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton
@@ -210,9 +210,9 @@ function AdminNavContent() {
         <SidebarMenu>
           <SidebarMenuItem>
             <Collapsible
+              className='w-full'
               open={systemOpen}
               onOpenChange={setSystemOpen}
-              className='w-full'
             >
               <CollapsibleTrigger asChild>
                 <SidebarMenuButton

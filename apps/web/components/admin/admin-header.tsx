@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,7 +15,7 @@ export function AdminHeader() {
   return (
     <header className="h-14 px-4 border-b flex items-center justify-between bg-background">
       <div className="flex items-center gap-4">
-        <Link href="/" className="font-semibold text-lg">
+        <Link className="font-semibold text-lg" href="/">
           EdgePress Admin
         </Link>
       </div>
@@ -23,7 +24,7 @@ export function AdminHeader() {
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" className="relative h-8 w-8 rounded-full">
               <Avatar className="h-8 w-8">
-                <AvatarImage src="" alt="Admin" />
+                <AvatarImage alt="Admin" src="" />
                 <AvatarFallback>AD</AvatarFallback>
               </Avatar>
             </Button>

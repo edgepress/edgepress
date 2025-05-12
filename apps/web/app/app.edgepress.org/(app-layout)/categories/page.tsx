@@ -1,14 +1,15 @@
+import { Edit, Plus, Tag, Trash } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
-import { Tag, Plus, Edit, Trash } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 
 // 模擬分類數據
 const mockCategories = [
-  { id: "1", name: "Technology", articleCount: 12, slug: "technology" },
-  { id: "2", name: "Web Development", articleCount: 8, slug: "web-development" },
-  { id: "3", name: "AI & Machine Learning", articleCount: 5, slug: "ai-machine-learning" },
-  { id: "4", name: "UX/UI Design", articleCount: 3, slug: "ux-ui-design" },
-  { id: "5", name: "Productivity", articleCount: 4, slug: "productivity" },
+  { id: "1", articleCount: 12, name: "Technology", slug: "technology" },
+  { id: "2", articleCount: 8, name: "Web Development", slug: "web-development" },
+  { id: "3", articleCount: 5, name: "AI & Machine Learning", slug: "ai-machine-learning" },
+  { id: "4", articleCount: 3, name: "UX/UI Design", slug: "ux-ui-design" },
+  { id: "5", articleCount: 4, name: "Productivity", slug: "productivity" },
 ];
 
 export default function CategoriesPage() {
@@ -47,10 +48,10 @@ export default function CategoriesPage() {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="ghost" size="icon">
+              <Button size="icon" variant="ghost">
                 <Edit className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="icon" className="text-destructive">
+              <Button size="icon" variant="ghost" className="text-destructive">
                 <Trash className="h-4 w-4" />
               </Button>
             </div>

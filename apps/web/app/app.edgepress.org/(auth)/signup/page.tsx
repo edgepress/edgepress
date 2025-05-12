@@ -1,13 +1,11 @@
 "use client";
 
+
+import { useRouter } from "next/navigation";
+
 import SignIn from "@/components/ui/auth/sign-in";
 import { SignUp } from "@/components/ui/auth/sign-up";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-
-import { authClient as client } from "@/lib/auth-client";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { toast } from "sonner";
 
 export default function Page() {
 	const router = useRouter();

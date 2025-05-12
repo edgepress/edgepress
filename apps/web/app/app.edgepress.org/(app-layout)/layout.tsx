@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+
 import { AppSidebar } from '@/components/app/app-sidebar';
 import {
   Breadcrumb,
@@ -11,23 +12,23 @@ import {
 import {Separator} from '@/components/ui/separator';
 import {
   SidebarInset,
-  SidebarTrigger,
   SidebarProvider,
+  SidebarTrigger,
 } from '@/components/ui/sidebar';
 
 interface AppLayoutProps {
   children: ReactNode;
   params: Promise<{
-    title?: string;
     breadcrumbs?: Array<{
       title: string;
       href?: string;
     }>;
+    title?: string;
   }>;
 }
 
 export default async function AppLayout({children, params}: AppLayoutProps) {
-  const { title, breadcrumbs } = await params;
+  const { breadcrumbs, title } = await params;
 
   return (
     <SidebarProvider>

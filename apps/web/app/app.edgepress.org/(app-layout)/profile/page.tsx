@@ -1,7 +1,7 @@
-import { Button } from "@/components/ui/button";
+import { Calendar, Mail, MapPin, User } from "lucide-react";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Separator } from "@/components/ui/separator";
-import { User, Mail, MapPin, Calendar } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ProfilePage() {
   return (
@@ -17,7 +17,7 @@ export default function ProfilePage() {
         <div className="flex flex-col md:flex-row gap-6">
           <div className="flex flex-col items-center gap-4">
             <Avatar className="h-24 w-24">
-              <AvatarImage src="" alt="John Doe" />
+              <AvatarImage alt="John Doe" src="" />
               <AvatarFallback className="text-2xl">JD</AvatarFallback>
             </Avatar>
             <Button>Change Photo</Button>
@@ -84,8 +84,8 @@ export default function ProfilePage() {
                   <input
                     id="joined"
                     className="flex-1 px-3 py-2 bg-transparent focus:outline-none"
-                    value="January 2023"
                     disabled
+                    value="January 2023"
                   />
                 </div>
               </div>
@@ -98,8 +98,8 @@ export default function ProfilePage() {
               <textarea
                 id="bio"
                 className="w-full min-h-[100px] p-3 border rounded-md bg-transparent focus:outline-none resize-none"
-                placeholder="Tell us about yourself..."
                 defaultValue="Content creator and technology enthusiast. I write about web development, programming, and tech industry trends."
+                placeholder="Tell us about yourself..."
               />
             </div>
             
