@@ -2,16 +2,14 @@
 
 
 import { useState } from "react";
+
+import { Check, ChevronLeft, ChevronsUpDown, Clock, Image, Save, Tag } from "lucide-react";
+import Link from "next/link";
 import {Toaster} from 'sonner';
 
 import {PlateEditor} from '@/components/editor/plate-editor';
 import {SettingsProvider} from '@/components/editor/settings';
-
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Save, Image, Tag, Clock, Check, ChevronsUpDown } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
 import {
   Command,
   CommandEmpty,
@@ -25,13 +23,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/lib/utils";
 
 const categories = [
-  { value: "technology", label: "Technology" },
-  { value: "web-development", label: "Web Development" },
-  { value: "ai-machine-learning", label: "AI & Machine Learning" },
-  { value: "ux-ui-design", label: "UX/UI Design" },
-  { value: "productivity", label: "Productivity" },
+  { label: "Technology", value: "technology" },
+  { label: "Web Development", value: "web-development" },
+  { label: "AI & Machine Learning", value: "ai-machine-learning" },
+  { label: "UX/UI Design", value: "ux-ui-design" },
+  { label: "Productivity", value: "productivity" },
 ];
 
 export default function NewPostPage() {
@@ -51,7 +51,7 @@ export default function NewPostPage() {
     setSaving(true);
     
     try {
-      console.log("Saving draft...", { title, content, category });
+      console.log("Saving draft...", { category, content, title });
       await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
       
       alert("Draft saved successfully!");
@@ -72,7 +72,7 @@ export default function NewPostPage() {
     setPublishing(true);
     
     try {
-      console.log("Publishing post...", { title, content, category });
+      console.log("Publishing post...", { category, content, title });
       await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
       
       alert("Post published successfully!");
@@ -88,7 +88,7 @@ export default function NewPostPage() {
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center gap-2'>
-          <Button asChild variant='ghost' size='sm' className='gap-1'>
+          <Button asChild size='sm' variant='ghost' className='gap-1'>
             <Link href='/posts'>
               <ChevronLeft className='h-4 w-4' />
               Back
@@ -99,12 +99,12 @@ export default function NewPostPage() {
         <div className='flex items-center gap-2'>
           <Button
             variant='outline'
-            onClick={handleSaveDraft}
             disabled={saving || publishing}
+            onClick={handleSaveDraft}
           >
             {saving ? 'Saving...' : 'Save as Draft'}
           </Button>
-          <Button onClick={handlePublish} disabled={saving || publishing}>
+          <Button disabled={saving || publishing} onClick={handlePublish}>
             <Save className='mr-2 h-4 w-4' />
             {publishing ? 'Publishing...' : 'Publish'}
           </Button>
@@ -115,11 +115,11 @@ export default function NewPostPage() {
         <div className='space-y-4'>
           <div>
             <input
-              type='text'
               className='w-full text-4xl font-bold border-none bg-transparent focus:outline-none focus:ring-0 p-0'
-              placeholder='Post Title'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
+              placeholder='Post Title'
+              type='text'
             />
           </div>
           <div className='h-screen w-full' data-registry='plate'>
@@ -141,7 +141,7 @@ export default function NewPostPage() {
 
             <div className='space-y-4'>
               <div className='space-y-2'>
-                <label htmlFor='category' className='text-sm font-medium block'>
+                <label className='text-sm font-medium block' htmlFor='category'>
                   Category
                 </label>
                 <Popover
@@ -151,9 +151,9 @@ export default function NewPostPage() {
                   <PopoverTrigger asChild>
                     <Button
                       variant='outline'
-                      role='combobox'
-                      aria-expanded={openCategoryPopover}
                       className='w-full justify-between'
+                      aria-expanded={openCategoryPopover}
+                      role='combobox'
                     >
                       {category
                         ? categories.find((c) => c.value === category)?.label
@@ -164,8 +164,8 @@ export default function NewPostPage() {
                   <PopoverContent className='w-full p-0'>
                     <Command>
                       <CommandInput
-                        placeholder='Search category...'
                         className='h-9'
+                        placeholder='Search category...'
                       />
                       <CommandList>
                         <CommandEmpty>No category found.</CommandEmpty>
@@ -201,15 +201,15 @@ export default function NewPostPage() {
 
               <div className='space-y-2'>
                 <label
-                  htmlFor='featured-image'
                   className='text-sm font-medium block'
+                  htmlFor='featured-image'
                 >
                   Featured Image
                 </label>
                 <div className='flex items-center justify-center border border-dashed rounded-md h-32 bg-muted/40'>
                   <Button
-                    variant='ghost'
                     size='sm'
+                    variant='ghost'
                     className='flex flex-col gap-1 h-auto py-3'
                   >
                     <Image className='h-5 w-5' />
@@ -219,7 +219,7 @@ export default function NewPostPage() {
               </div>
 
               <div className='space-y-2'>
-                <label htmlFor='schedule' className='text-sm font-medium block'>
+                <label className='text-sm font-medium block' htmlFor='schedule'>
                   Schedule
                 </label>
                 <div className='flex items-center gap-2'>
