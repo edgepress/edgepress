@@ -11,9 +11,6 @@
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
-    "@blocknote/core": "^0.29.1",
-    "@blocknote/mantine": "^0.29.1",
-    "@blocknote/react": "^0.29.1",
     "@edgepress/prisma": "workspace:*",
     "@edgepress/ui": "workspace:*",
     "@radix-ui/react-avatar": "^1.1.7",
