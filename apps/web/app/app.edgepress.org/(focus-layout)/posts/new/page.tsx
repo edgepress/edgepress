@@ -1,14 +1,13 @@
 "use client";
 
-
 import { useState } from "react";
 
 import { Check, ChevronLeft, ChevronsUpDown, Clock, Image, Save, Tag } from "lucide-react";
 import Link from "next/link";
-import {Toaster} from 'sonner';
+import { Toaster } from "sonner";
 
-import {PlateEditor} from '@/components/editor/plate-editor';
-import {SettingsProvider} from '@/components/editor/settings';
+import { PlateEditor } from "@/components/editor/plate-editor";
+import { SettingsProvider } from "@/components/editor/settings";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -112,8 +111,8 @@ export default function NewPostPage() {
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-6'>
-        <div className='space-y-4'>
-          <div>
+        <div className='space-y-4 overflow-hidden'>
+          <div className='w-full'>
             <input
               className='w-full text-4xl font-bold border-none bg-transparent focus:outline-none focus:ring-0 p-0'
               value={title}
@@ -122,6 +121,7 @@ export default function NewPostPage() {
               type='text'
             />
           </div>
+
           <div className='h-screen w-full' data-registry='plate'>
             <SettingsProvider>
               <PlateEditor />
