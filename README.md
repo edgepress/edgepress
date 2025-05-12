@@ -9,7 +9,6 @@ EdgePress is a modern content management system built for edge computing, featur
   - User portal (app.edgepress.org) for content creators
 
 - **Rich Content Editing**
-  - BlockNote rich text editor with collaborative editing
   - File and image management
   - Category and tag organization
 
@@ -25,7 +24,6 @@ EdgePress is a modern content management system built for edge computing, featur
   - TypeScript
   - Tailwind CSS
   - Shadcn UI components
-  - BlockNote editor
 
 - **Backend**
   - Vercel Edge Functions
