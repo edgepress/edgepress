@@ -1,6 +1,7 @@
 import React from 'react';
-import {Card, CardContent, CardHeader, CardTitle} from '@/components/ui/card';
-import {LayoutDashboard, Users, FileText, LayoutGrid} from 'lucide-react';
+
+import {Card, CardContent, CardHeader, CardTitle} from '@edgepress/ui/components/card';
+import {FileText, LayoutDashboard, LayoutGrid, Users} from 'lucide-react';
 
 export default function DashboardPage() {
   return (

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@edgepress/ui/components/button";
+import { Separator } from "@edgepress/ui/components/separator";
 
 export default function SettingsPage() {
   return (
@@ -29,12 +29,12 @@ export default function SettingsPage() {
               <div className="flex items-center h-5">
                 <input
                   id="email-notifications"
-                  type="checkbox"
                   className="h-4 w-4 rounded border-gray-300"
                   defaultChecked
                   aria-label="Enable email notifications"
+                  type="checkbox"
                 />
-                <label htmlFor="email-notifications" className="sr-only">
+                <label className="sr-only" htmlFor="email-notifications">
                   Enable email notifications
                 </label>
               </div>
@@ -49,12 +49,12 @@ export default function SettingsPage() {
               <div className="flex items-center h-5">
                 <input
                   id="comment-notifications"
-                  type="checkbox"
                   className="h-4 w-4 rounded border-gray-300"
                   defaultChecked
                   aria-label="Enable comment notifications"
+                  type="checkbox"
                 />
-                <label htmlFor="comment-notifications" className="sr-only">
+                <label className="sr-only" htmlFor="comment-notifications">
                   Enable comment notifications
                 </label>
               </div>
@@ -69,11 +69,11 @@ export default function SettingsPage() {
               <div className="flex items-center h-5">
                 <input
                   id="marketing-emails"
-                  type="checkbox"
                   className="h-4 w-4 rounded border-gray-300"
                   aria-label="Enable marketing emails"
+                  type="checkbox"
                 />
-                <label htmlFor="marketing-emails" className="sr-only">
+                <label className="sr-only" htmlFor="marketing-emails">
                   Enable marketing emails
                 </label>
               </div>
@@ -97,7 +97,7 @@ export default function SettingsPage() {
                   Choose your preferred language for the interface
                 </p>
               </div>
-              <label htmlFor="language-select" className="sr-only">Select display language</label>
+              <label className="sr-only" htmlFor="language-select">Select display language</label>
               <select 
                 id="language-select"
                 className="px-3 py-2 border rounded-md bg-transparent"
@@ -118,11 +118,11 @@ export default function SettingsPage() {
               <div className="flex items-center h-5">
                 <input
                   id="dark-mode"
-                  type="checkbox"
                   className="h-4 w-4 rounded border-gray-300"
                   aria-label="Enable dark mode"
+                  type="checkbox"
                 />
-                <label htmlFor="dark-mode" className="sr-only">
+                <label className="sr-only" htmlFor="dark-mode">
                   Enable dark mode
                 </label>
               </div>

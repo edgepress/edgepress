@@ -1,8 +1,9 @@
+
+import { Button } from "@edgepress/ui/components/button";
 import { PlusCircle } from "lucide-react";
 import Link from "next/link";
 
 import { PostList } from "@/components/app/article-list";
-import { Button } from "@/components/ui/button";
 
 export default function PostsPage() {
   return (

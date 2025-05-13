@@ -1,6 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import { AppSidebar } from '@/components/app/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,13 +7,15 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import {Separator} from '@/components/ui/separator';
+} from '@edgepress/ui/components/breadcrumb';
+import {Separator} from '@edgepress/ui/components/separator';
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/ui/sidebar';
+} from '@edgepress/ui/components/sidebar';
+
+import { AppSidebar } from '@/components/app/app-sidebar';
 
 interface AppLayoutProps {
   children: ReactNode;

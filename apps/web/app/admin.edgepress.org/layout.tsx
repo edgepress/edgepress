@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { AdminSidebar } from "@/components/admin/admin-sidebar";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -7,22 +7,24 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
-import {Separator} from '@/components/ui/separator';
+} from '@edgepress/ui/components/breadcrumb';
+import {Separator} from '@edgepress/ui/components/separator';
 import {
   SidebarInset,
-  SidebarTrigger,
   SidebarProvider,
-} from '@/components/ui/sidebar';
+  SidebarTrigger,
+} from '@edgepress/ui/components/sidebar';
+
+import { AdminSidebar } from "@/components/admin/admin-sidebar";
 
 interface AdminLayoutProps {
   children: ReactNode;
   params: Promise<{
-    title?: string;
     breadcrumbs?: Array<{
       title: string;
       href?: string;
     }>;
+    title?: string;
   }>;
 }
 
@@ -30,7 +32,7 @@ export default async function AdminLayout({
   children,
   params
 }: AdminLayoutProps) {
-  const { title, breadcrumbs } = await params;
+  const { breadcrumbs, title } = await params;
 
   return (
     <SidebarProvider>

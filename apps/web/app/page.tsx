@@ -1,6 +1,6 @@
+import { buttonVariants } from "@edgepress/ui/components/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@edgepress/ui/components/card";
 import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function DevHomePage() {
 
@@ -28,20 +28,20 @@ export default function DevHomePage() {
               <h3 className="font-medium">User Interface</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="//app.localhost:3000/"
                   className={buttonVariants({ variant: "default" })}
+                  href="//app.localhost:3000/"
                 >
                   App Home
                 </Link>
                 <Link 
-                  href="//app.localhost:3000/posts"
                   className={buttonVariants({ variant: "outline" })}
+                  href="//app.localhost:3000/posts"
                 >
                   All Articles
                 </Link>
                 <Link 
-                  href="//app.localhost:3000/posts/featured-post"
                   className={buttonVariants({ variant: "outline" })}
+                  href="//app.localhost:3000/posts/featured-post"
                 >
                   Article Detail
                 </Link>
@@ -52,20 +52,20 @@ export default function DevHomePage() {
               <h3 className="font-medium">Admin Interface</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="//admin.localhost:3000/"
                   className={buttonVariants({ variant: "default" })}
+                  href="//admin.localhost:3000/"
                 >
                   Admin Home
                 </Link>
                 <Link 
-                  href="//admin.localhost:3000/users"
                   className={buttonVariants({ variant: "outline" })}
+                  href="//admin.localhost:3000/users"
                 >
                   User Management
                 </Link>
                 <Link 
-                  href="//admin.localhost:3000/settings"
                   className={buttonVariants({ variant: "outline" })}
+                  href="//admin.localhost:3000/settings"
                 >
                   System Settings
                 </Link>
@@ -84,8 +84,8 @@ export default function DevHomePage() {
               <h3 className="font-medium">Checkout Flow</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="//checkout.localhost:3000/"
                   className={buttonVariants({ variant: "outline" })}
+                  href="//checkout.localhost:3000/"
                 >
                   Checkout Page
                 </Link>
@@ -96,14 +96,14 @@ export default function DevHomePage() {
               <h3 className="font-medium">API Testing</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="/api/health"
                   className={buttonVariants({ variant: "outline" })}
+                  href="/api/health"
                 >
                   Health Check
                 </Link>
                 <Link 
-                  href="/api/docs"
                   className={buttonVariants({ variant: "outline" })}
+                  href="/api/docs"
                 >
                   API Docs
                 </Link>
@@ -122,8 +122,8 @@ export default function DevHomePage() {
               <h3 className="font-medium">Component Library</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="/dev/components"
                   className={buttonVariants({ variant: "outline" })}
+                  href="/dev/components"
                 >
                   Component Showcase
                 </Link>
@@ -134,8 +134,8 @@ export default function DevHomePage() {
               <h3 className="font-medium">Testing Pages</h3>
               <div className="flex flex-wrap gap-2">
                 <Link 
-                  href="/dev/test-mode"
                   className={buttonVariants({ variant: "outline" })}
+                  href="/dev/test-mode"
                 >
                   Test Mode
                 </Link>
@@ -154,18 +154,18 @@ export default function DevHomePage() {
               <h3 className="font-medium">Documentation</h3>
               <div className="flex flex-wrap gap-2">
                 <a 
-                  href="https://github.com/edgepress/edgepress" 
-                  target="_blank"
+                  className={buttonVariants({ variant: "outline" })} 
+                  href="https://github.com/edgepress/edgepress"
                   rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
+                  target="_blank"
                 >
                   GitHub Repo
                 </a>
                 <a 
-                  href="https://edgepress.org/docs" 
-                  target="_blank"
+                  className={buttonVariants({ variant: "outline" })} 
+                  href="https://edgepress.org/docs"
                   rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
+                  target="_blank"
                 >
                   Dev Documentation
                 </a>
@@ -176,18 +176,18 @@ export default function DevHomePage() {
               <h3 className="font-medium">Development Environment</h3>
               <div className="flex flex-wrap gap-2">
                 <a 
-                  href="http://localhost:9000" 
-                  target="_blank"
+                  className={buttonVariants({ variant: "outline" })} 
+                  href="http://localhost:9000"
                   rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
+                  target="_blank"
                 >
                   Dev Server
                 </a>
                 <a 
-                  href="http://localhost:8080" 
-                  target="_blank"
+                  className={buttonVariants({ variant: "outline" })} 
+                  href="http://localhost:8080"
                   rel="noopener noreferrer"
-                  className={buttonVariants({ variant: "outline" })}
+                  target="_blank"
                 >
                   Database Admin
                 </a>

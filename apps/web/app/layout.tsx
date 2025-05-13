@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+
 import localFont from "next/font/local";
-import "./globals.css";
+
+import "@edgepress/ui/globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -12,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "EdgePress",
   description: "EdgePress",
+  title: "EdgePress",
 };
 
 export default function RootLayout({

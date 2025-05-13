@@ -2,13 +2,7 @@
 
 import { useState } from "react";
 
-import { Check, ChevronLeft, ChevronsUpDown, Clock, Image, Save, Tag } from "lucide-react";
-import Link from "next/link";
-import { Toaster } from "sonner";
-
-import { PlateEditor } from "@/components/editor/plate-editor";
-import { SettingsProvider } from "@/components/editor/settings";
-import { Button } from "@/components/ui/button";
+import { Button } from "@edgepress/ui/components/button";
 import {
   Command,
   CommandEmpty,
@@ -16,14 +10,19 @@ import {
   CommandInput,
   CommandItem,
   CommandList,
-} from "@/components/ui/command";
+} from "@edgepress/ui/components/command";
+import { PlateEditor } from "@edgepress/ui/components/editor/plate-editor";
+import { SettingsProvider } from "@edgepress/ui/components/editor/settings";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
-import { cn } from "@/lib/utils";
+} from "@edgepress/ui/components/popover";
+import { Separator } from "@edgepress/ui/components/separator";
+import { cn } from "@edgepress/ui/lib/utils";
+import { Check, ChevronLeft, ChevronsUpDown, Clock, Image, Save, Tag } from "lucide-react";
+import Link from "next/link";
+import { Toaster } from "sonner";
 
 const categories = [
   { label: "Technology", value: "technology" },
@@ -174,7 +173,7 @@ export default function NewPostPage() {
                             <CommandItem
                               key={c.value}
                               value={c.value}
-                              onSelect={(currentValue) => {
+                              onSelect={(currentValue: string) => {
                                 setCategory(
                                   currentValue === category ? '' : currentValue
                                 );

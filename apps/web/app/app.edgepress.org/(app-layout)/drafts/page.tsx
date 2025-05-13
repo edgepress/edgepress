@@ -1,7 +1,9 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { PostList } from "@/components/app/article-list";
+
+import { Button } from "@edgepress/ui/components/button";
 import { PlusCircle } from "lucide-react";
+import Link from "next/link";
+
+import { PostList } from "@/components/app/article-list";
 
 export default function DraftsPage() {
   return (

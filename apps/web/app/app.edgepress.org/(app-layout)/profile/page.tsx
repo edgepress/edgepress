@@ -1,7 +1,6 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@edgepress/ui/components/avatar";
+import { Button } from "@edgepress/ui/components/button";
 import { Calendar, Mail, MapPin, User } from "lucide-react";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
 
 export default function ProfilePage() {
   return (

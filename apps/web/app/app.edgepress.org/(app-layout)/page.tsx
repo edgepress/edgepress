@@ -1,12 +1,13 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { StatsCard } from "@/components/app/stats-card";
-import { PostList } from "@/components/app/article-list";
+import { Button } from "@edgepress/ui/components/button";
 import { 
-  FileText, 
   Eye, 
+  FileText, 
   ThumbsUp 
 } from "lucide-react";
+import Link from "next/link";
+
+import { PostList } from "@/components/app/article-list";
+import { StatsCard } from "@/components/app/stats-card";
 
 export default function Dashboard() {
   return (
@@ -20,37 +21,37 @@ export default function Dashboard() {
 
       <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         <StatsCard 
-          title="Total Posts" 
           value={3} 
-          icon={<FileText className="h-5 w-5" />}
           description="All time" 
+          title="Total Posts"
+          icon={<FileText className="h-5 w-5" />} 
         />
         <StatsCard 
-          title="Published" 
           value={2} 
-          icon={<FileText className="h-5 w-5" />}
           description="Live on site" 
+          title="Published"
+          icon={<FileText className="h-5 w-5" />} 
         />
         <StatsCard 
-          title="Total Views" 
           value="2,096" 
+          description="vs last month" 
+          title="Total Views"
           icon={<Eye className="h-5 w-5" />}
           trend="up"
-          trendValue="12%"
-          description="vs last month" 
+          trendValue="12%" 
         />
         <StatsCard 
-          title="Engagement" 
           value="96" 
-          icon={<ThumbsUp className="h-5 w-5" />}
           description="Likes and comments" 
+          title="Engagement"
+          icon={<ThumbsUp className="h-5 w-5" />} 
         />
       </div>
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Recent Posts</h2>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild size="sm" variant="outline">
             <Link href="/posts">View all</Link>
           </Button>
         </div>
@@ -60,7 +61,7 @@ export default function Dashboard() {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold">Draft Posts</h2>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild size="sm" variant="outline">
             <Link href="/drafts">View all drafts</Link>
           </Button>
         </div>

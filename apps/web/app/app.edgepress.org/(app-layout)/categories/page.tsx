@@ -1,7 +1,6 @@
+import { Button } from "@edgepress/ui/components/button";
+import { Separator } from "@edgepress/ui/components/separator";
 import { Edit, Plus, Tag, Trash } from "lucide-react";
-
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 
 // 模擬分類數據
 const mockCategories = [
