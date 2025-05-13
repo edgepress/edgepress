@@ -1,78 +1,78 @@
 "use client"
 
-import {
-  LogOut,
-  ChevronsUpDown,
-  User,
-  Settings,
-  LayoutDashboard,
-  Building,
-  Plus,
-  Users,
-} from "lucide-react"
+import { useState } from "react"
 
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from "@/components/ui/avatar"
+} from "@edgepress/ui/components/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
+  DropdownMenuSeparator,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-} from "@/components/ui/dropdown-menu"
+  DropdownMenuTrigger,
+} from "@edgepress/ui/components/dropdown-menu"
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@edgepress/ui/components/sidebar"
+import {
+  Building,
+  ChevronsUpDown,
+  LayoutDashboard,
+  LogOut,
+  Plus,
+  Settings,
+  User,
+  Users,
+} from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
 
 // Mock user data - 實際應用中應該從認證系統獲取
 const USER_DATA = {
-  name: "John Doe",
+  avatar: "",
   email: "john.doe@example.com",
-  avatar: ""
+  name: "John Doe"
 }
 
 // Define organization interface
 interface Organization {
   id: string;
+  logo: string | null;
   name: string;
   role: string;
-  logo: string | null;
 }
 
 // Mock data for organizations
 const MOCK_ORGANIZATIONS: Organization[] = [
   { 
     id: "org1", 
+    logo: null, 
     name: "Personal", 
-    role: "Owner", 
-    logo: null
+    role: "Owner"
   },
   { 
     id: "org2", 
+    logo: "https://api.dicebear.com/6.x/initials/svg?seed=AC", 
     name: "Acme Corporation", 
-    role: "Admin", 
-    logo: "https://api.dicebear.com/6.x/initials/svg?seed=AC"
+    role: "Admin"
   },
   { 
     id: "org3", 
-    name: "Design Studio", 
-    role: "Member",
-    logo: "https://api.dicebear.com/6.x/initials/svg?seed=DS"
+    logo: "https://api.dicebear.com/6.x/initials/svg?seed=DS", 
+    name: "Design Studio",
+    role: "Member"
   },
 ];
 
@@ -90,7 +90,7 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={USER_DATA.avatar} alt={USER_DATA.name} />
+                <AvatarImage alt={USER_DATA.name} src={USER_DATA.avatar} />
                 <AvatarFallback>JD</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
@@ -102,14 +102,14 @@ export function NavUser() {
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56"
-            side={isMobile ? "bottom" : "right"}
             align="end"
+            side={isMobile ? "bottom" : "right"}
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-2 py-1.5 text-left text-sm">
                 <Avatar className="h-8 w-8">
-                  <AvatarImage src={USER_DATA.avatar} alt={USER_DATA.name} />
+                  <AvatarImage alt={USER_DATA.name} src={USER_DATA.avatar} />
                   <AvatarFallback>JD</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
@@ -127,7 +127,7 @@ export function NavUser() {
               <div className="flex items-center gap-2 rounded-md bg-muted p-1.5">
                 {currentOrg.logo ? (
                   <Avatar className="h-6 w-6">
-                    <AvatarImage src={currentOrg.logo} alt={currentOrg.name} />
+                    <AvatarImage alt={currentOrg.name} src={currentOrg.logo} />
                     <AvatarFallback>{currentOrg.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 ) : (
@@ -152,7 +152,7 @@ export function NavUser() {
               <DropdownMenuSubContent className="min-w-[220px]">
                 <DropdownMenuRadioGroup 
                   value={currentOrg.id} 
-                  onValueChange={(id) => {
+                  onValueChange={(id: string) => {
                     const org = MOCK_ORGANIZATIONS.find(o => o.id === id);
                     if (org) setCurrentOrg(org);
                   }}
@@ -160,13 +160,13 @@ export function NavUser() {
                   {MOCK_ORGANIZATIONS.map((org) => (
                     <DropdownMenuRadioItem 
                       key={org.id} 
-                      value={org.id}
                       className="py-1.5 cursor-pointer"
+                      value={org.id}
                     >
                       <div className="flex items-center gap-2">
                         {org.logo ? (
                           <Avatar className="h-6 w-6">
-                            <AvatarImage src={org.logo} alt={org.name} />
+                            <AvatarImage alt={org.name} src={org.logo} />
                             <AvatarFallback>{org.name.substring(0, 2)}</AvatarFallback>
                           </Avatar>
                         ) : (
@@ -184,7 +184,7 @@ export function NavUser() {
                 </DropdownMenuRadioGroup>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/organizations/new" className="flex w-full items-center cursor-pointer">
+                  <Link className="flex w-full items-center cursor-pointer" href="/organizations/new">
                     <Plus className="mr-2 h-4 w-4" />
                     <span>Create Organization</span>
                   </Link>
@@ -195,19 +195,19 @@ export function NavUser() {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuItem asChild>
-                <Link href="/" className="flex w-full items-center cursor-pointer">
+                <Link className="flex w-full items-center cursor-pointer" href="/">
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   Dashboard
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/profile" className="flex w-full items-center cursor-pointer">
+                <Link className="flex w-full items-center cursor-pointer" href="/profile">
                   <User className="mr-2 h-4 w-4" />
                   Profile
                 </Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
-                <Link href="/settings" className="flex w-full items-center cursor-pointer">
+                <Link className="flex w-full items-center cursor-pointer" href="/settings">
                   <Settings className="mr-2 h-4 w-4" />
                   Settings
                 </Link>

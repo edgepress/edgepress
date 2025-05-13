@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react"
-import { Globe, ChevronsUpDown, Check, Plus } from "lucide-react"
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,24 +9,25 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+} from "@edgepress/ui/components/dropdown-menu"
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
-} from "@/components/ui/sidebar"
+} from "@edgepress/ui/components/sidebar"
+import { Check, ChevronsUpDown, Globe, Plus } from "lucide-react"
 import Link from "next/link"
 
 // Mock data for sites - 實際應用中應該從API獲取
 const MOCK_SITES = [
-  { id: "site1", name: "My Blog", domain: "blog.example.com" },
+  { id: "site1", domain: "blog.example.com", name: "My Blog" },
 ];
 
 interface Site {
   id: string;
-  name: string;
   domain: string;
+  name: string;
 }
 
 export function SiteSwitcher() {
@@ -73,8 +74,8 @@ export function SiteSwitcher() {
             {MOCK_SITES.map((site) => (
               <DropdownMenuItem
                 key={site.id}
-                onClick={() => setCurrentSite(site)}
                 className='gap-2 p-2'
+                onClick={() => setCurrentSite(site)}
               >
                 <div className='flex items-center gap-2 truncate'>
                   <span className='truncate'>{site.name}</span>
@@ -86,7 +87,7 @@ export function SiteSwitcher() {
             ))}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild className='gap-2 p-2'>
-              <Link href='/sites/new' className='flex items-center gap-2'>
+              <Link className='flex items-center gap-2' href='/sites/new'>
                 <div className='flex size-6 items-center justify-center rounded-md border bg-background'>
                   <Plus className='size-4' />
                 </div>
