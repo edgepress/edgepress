@@ -1,7 +1,5 @@
-import Link from "next/link";
-
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@edgepress/ui/components/avatar";
+import { Button } from "@edgepress/ui/components/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,7 +7,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@edgepress/ui/components/dropdown-menu";
+import Link from "next/link";
 
 export function AdminHeader() {
   return (
