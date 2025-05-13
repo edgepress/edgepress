@@ -30,19 +30,19 @@ import {
   PencilLineIcon,
 } from 'lucide-react';
 
-import { commentsPlugin } from '@/components/editor/plugins/comments-plugin';
+import { commentsPlugin } from '@edgepress/ui/components/editor/plugins/comments-plugin';
 import {
   type TDiscussion,
   discussionPlugin,
-} from '@/components/editor/plugins/discussion-plugin';
-import { suggestionPlugin } from '@/components/editor/plugins/suggestion-plugin';
-import { Button } from '@/components/plate-ui/button';
+} from '@edgepress/ui/components/editor/plugins/discussion-plugin';
+import { suggestionPlugin } from '@edgepress/ui/components/editor/plugins/suggestion-plugin';
+import { Button } from '@edgepress/ui/components/plate-ui/button';
 import {
   Popover,
   PopoverAnchor,
   PopoverContent,
   PopoverTrigger,
-} from '@/components/plate-ui/popover';
+} from '@edgepress/ui/components/plate-ui/popover';
 
 import {
   BlockSuggestionCard,

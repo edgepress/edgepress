@@ -32,7 +32,7 @@ import {
   getBlockType,
   setBlockType,
   STRUCTURAL_TYPES,
-} from '@/components/editor/transforms';
+} from '@edgepress/ui/components/editor/transforms';
 
 import {
   DropdownMenu,

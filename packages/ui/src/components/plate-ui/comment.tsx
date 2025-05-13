@@ -26,7 +26,7 @@ import {
   XIcon,
 } from 'lucide-react';
 
-import { discussionPlugin } from '@/components/editor/plugins/discussion-plugin';
+import { discussionPlugin } from '@edgepress/ui/components/editor/plugins/discussion-plugin';
 
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { Button } from './button';

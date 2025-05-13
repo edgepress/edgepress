@@ -13,7 +13,7 @@ import {
   useSelected,
 } from '@udecode/plate/react';
 
-import { useMounted } from '@/hooks/use-mounted';
+import { useMounted } from '@edgepress/ui/hooks/use-mounted';
 
 export const MentionElement = withRef<
   typeof PlateElement,

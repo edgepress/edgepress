@@ -4,14 +4,14 @@ import * as React from 'react';
 
 import type { AIChatPluginConfig } from '@udecode/plate-ai/react';
 
+import { AILoadingBar } from '@edgepress/ui/components/plate-ui/ai-loading-bar';
+import { AIMenu } from '@edgepress/ui/components/plate-ui/ai-menu';
 import { PathApi } from '@udecode/plate';
 import { streamInsertChunk, withAIBatch } from '@udecode/plate-ai';
 import { AIChatPlugin, AIPlugin, useChatChunk } from '@udecode/plate-ai/react';
 import { usePluginOption } from '@udecode/plate/react';
 
-import { markdownPlugin } from '@/components/editor/plugins/markdown-plugin';
-import { AILoadingBar } from '@/components/plate-ui/ai-loading-bar';
-import { AIMenu } from '@/components/plate-ui/ai-menu';
+import { markdownPlugin } from '@edgepress/ui/components/editor/plugins/markdown-plugin';
 
 import { cursorOverlayPlugin } from './cursor-overlay-plugin';
 

@@ -1,10 +1,8 @@
 'use client';
 
-import type { TComment } from '@/components/plate-ui/comment';
-
+import { BlockDiscussion } from '@edgepress/ui/components/plate-ui/block-discussion';
+import { TComment } from '@edgepress/ui/components/plate-ui/comment';
 import { createPlatePlugin } from '@udecode/plate/react';
-
-import { BlockDiscussion } from '@/components/plate-ui/block-discussion';
 
 export interface TDiscussion {
   id: string;

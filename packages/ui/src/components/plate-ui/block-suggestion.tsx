@@ -53,8 +53,8 @@ import { CheckIcon, XIcon } from 'lucide-react';
 import {
   type TDiscussion,
   discussionPlugin,
-} from '@/components/editor/plugins/discussion-plugin';
-import { suggestionPlugin } from '@/components/editor/plugins/suggestion-plugin';
+} from '@edgepress/ui/components/editor/plugins/discussion-plugin';
+import { suggestionPlugin } from '@edgepress/ui/components/editor/plugins/suggestion-plugin';
 
 import { Avatar, AvatarFallback, AvatarImage } from './avatar';
 import { Button } from './button';

@@ -29,13 +29,13 @@ import { ArrowUpIcon } from 'lucide-react';
 import {
   type TDiscussion,
   discussionPlugin,
-} from '@/components/editor/plugins/discussion-plugin';
-import { useCreateEditor } from '@/components/editor/use-create-editor';
+} from '@edgepress/ui/components/editor/plugins/discussion-plugin';
+import { useCreateEditor } from '@edgepress/ui/components/editor/use-create-editor';
 import {
   Avatar,
   AvatarFallback,
   AvatarImage,
-} from '@/components/plate-ui/avatar';
+} from '@edgepress/ui/components/plate-ui/avatar';
 
 import type { TComment } from './comment';
 

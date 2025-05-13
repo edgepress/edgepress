@@ -5,7 +5,7 @@ import * as React from 'react';
 import { useChat as useBaseChat } from '@ai-sdk/react';
 import { faker } from '@faker-js/faker';
 
-import { useSettings } from '@/components/editor/settings';
+import { useSettings } from '@edgepress/ui/components/editor/settings';
 
 export const useChat = () => {
   const { keys, model } = useSettings();

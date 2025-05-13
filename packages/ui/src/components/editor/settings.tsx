@@ -2,6 +2,30 @@
 
 import * as React from 'react';
 
+import { Button } from '@edgepress/ui/components/button';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@edgepress/ui/components/command';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@edgepress/ui/components/dialog';
+import { Input } from '@edgepress/ui/components/input';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@edgepress/ui/components/popover';
+import { cn } from '@edgepress/ui/lib/utils';
 import { CopilotPlugin } from '@udecode/plate-ai/react';
 import { useEditorPlugin } from '@udecode/plate/react';
 import {
@@ -13,31 +37,6 @@ import {
   Settings,
   Wand2Icon,
 } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
-import { Input } from '@/components/ui/input';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
 
 interface Model {
   label: string;
