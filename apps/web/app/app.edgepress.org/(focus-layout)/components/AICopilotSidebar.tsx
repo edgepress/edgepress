@@ -8,6 +8,8 @@ import { ScrollArea } from "@edgepress/ui/components/scroll-area";
 import { cn } from "@edgepress/ui/lib/utils";
 import { Bot, ChevronLeft, ChevronRight, Send, Sparkles, User } from "lucide-react";
 
+import { useSidebar } from "./SidebarContext";
+
 // Create a custom Textarea component for the Copilot
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   className?: string;
@@ -45,16 +47,11 @@ const initialMessages: ChatMessage[] = [
   }
 ];
 
-export function AICopilotSidebar({ children }: { children?: React.ReactNode }) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+export function AICopilotSidebar() {
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
   const [messages, setMessages] = useState<ChatMessage[]>(initialMessages);
   const [inputMessage, setInputMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  
-  // Toggle sidebar
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
   
   // Handle sending a message to the AI assistant
   const handleSendMessage = async () => {
@@ -92,21 +89,10 @@ export function AICopilotSidebar({ children }: { children?: React.ReactNode }) {
 
   return (
     <>
-      {/* Main content wrapper with padding adjustment */}
-      <div
-        className={cn(
-          'transition-all duration-300 ease-in-out p-4',
-          isSidebarOpen ? 'pr-[336px]' : 'pr-4'
-        )}
-      >
-        {/* Render the children content */}
-        {children}
-      </div>
-      
       {/* AI Copilot Sidebar */}
       <div
         className={cn(
-          'fixed top-0 bottom-0 right-0 w-[320px] bg-background rounded-md border border-muted shadow-md',
+          'fixed top-0 bottom-0 right-0 w-[320px] bg-background rounded-md border border-muted shadow-md z-10',
           'flex flex-col transition-all duration-300 ease-in-out',
           isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
         )}
