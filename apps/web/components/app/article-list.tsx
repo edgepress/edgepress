@@ -1,5 +1,11 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "@edgepress/ui/components/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@edgepress/ui/components/dropdown-menu";
 import { 
   CalendarDays, 
   Edit, 
@@ -7,43 +13,37 @@ import {
   MoreHorizontal, 
   Trash 
 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
 
 // 模擬文章資料
 const mockPosts = [
   {
     id: "1",
-    title: "Getting Started with Next.js",
-    status: "published",
     createdAt: "2023-09-15",
-    views: 1240,
     excerpt: "Learn how to build modern web applications with Next.js...",
+    status: "published",
+    title: "Getting Started with Next.js",
+    views: 1240,
   },
   {
     id: "2",
-    title: "The Power of TypeScript",
-    status: "published",
     createdAt: "2023-10-05",
-    views: 856,
     excerpt: "TypeScript adds static type definitions to JavaScript, helping...",
+    status: "published",
+    title: "The Power of TypeScript",
+    views: 856,
   },
   {
     id: "3",
-    title: "Mastering Tailwind CSS",
-    status: "draft",
     createdAt: "2023-11-20",
-    views: 0,
     excerpt: "Tailwind CSS is a utility-first CSS framework packed with...",
+    status: "draft",
+    title: "Mastering Tailwind CSS",
+    views: 0,
   },
 ];
 
-export function PostList({ status = "all" }: { status?: "all" | "published" | "draft" }) {
+export function PostList({ status = "all" }: { status?: "all" | "draft" | "published" }) {
   // 根據狀態過濾文章
   const posts = status === "all" 
     ? mockPosts 
@@ -68,7 +68,7 @@ export function PostList({ status = "all" }: { status?: "all" | "published" | "d
             <div className="flex items-start justify-between">
               <div className="space-y-1">
                 <h3 className="font-medium">
-                  <Link href={`/posts/${post.id}`} className="hover:underline">
+                  <Link className="hover:underline" href={`/posts/${post.id}`}>
                     {post.title}
                   </Link>
                 </h3>
