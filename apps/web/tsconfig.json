@@ -4,9 +4,8 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@/*": ["./*"],
+      "@edgepress/ui/*": ["../../packages/ui/src/*"]
     },
     "plugins": [
       {
@@ -20,7 +19,7 @@
     "next-env.d.ts",
     "next.config.js",
     ".next/types/**/*.ts"
-, "../../packages/ui/src/hooks/use-debounce.ts", "../../packages/ui/src/lib/utils.ts"  ],
+  ],
   "exclude": [
     "node_modules"
   ]
