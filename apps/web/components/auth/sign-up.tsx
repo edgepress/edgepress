@@ -1,6 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+
+import { Button } from "@edgepress/ui/components/button";
 import {
 	Card,
 	CardContent,
@@ -8,15 +10,15 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import Image from "next/image";
+} from "@edgepress/ui/components/card";
+import { Input } from "@edgepress/ui/components/input";
+import { Label } from "@edgepress/ui/components/label";
 import { Loader2, X } from "lucide-react";
-import { signUp } from "@/lib/auth-client";
-import { toast } from "sonner";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+
+import { signUp } from "@/lib/auth-client";
 
 export function SignUp() {
 	const [firstName, setFirstName] = useState("");
@@ -56,24 +58,24 @@ export function SignUp() {
 							<Label htmlFor="first-name">First name</Label>
 							<Input
 								id="first-name"
-								placeholder="Max"
 								required
+								value={firstName}
 								onChange={(e) => {
 									setFirstName(e.target.value);
 								}}
-								value={firstName}
+								placeholder="Max"
 							/>
 						</div>
 						<div className="grid gap-2">
 							<Label htmlFor="last-name">Last name</Label>
 							<Input
 								id="last-name"
-								placeholder="Robinson"
 								required
+								value={lastName}
 								onChange={(e) => {
 									setLastName(e.target.value);
 								}}
-								value={lastName}
+								placeholder="Robinson"
 							/>
 						</div>
 					</div>
@@ -81,35 +83,35 @@ export function SignUp() {
 						<Label htmlFor="email">Email</Label>
 						<Input
 							id="email"
-							type="email"
-							placeholder="m@example.com"
 							required
+							value={email}
 							onChange={(e) => {
 								setEmail(e.target.value);
 							}}
-							value={email}
+							placeholder="m@example.com"
+							type="email"
 						/>
 					</div>
 					<div className="grid gap-2">
 						<Label htmlFor="password">Password</Label>
 						<Input
 							id="password"
-							type="password"
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							autoComplete="new-password"
 							placeholder="Password"
+							autoComplete="new-password"
+							type="password"
 						/>
 					</div>
 					<div className="grid gap-2">
 						<Label htmlFor="password">Confirm Password</Label>
 						<Input
 							id="password_confirmation"
-							type="password"
 							value={passwordConfirmation}
 							onChange={(e) => setPasswordConfirmation(e.target.value)}
-							autoComplete="new-password"
 							placeholder="Confirm Password"
+							autoComplete="new-password"
+							type="password"
 						/>
 					</div>
 					<div className="grid gap-2">
@@ -118,20 +120,20 @@ export function SignUp() {
 							{imagePreview && (
 								<div className="relative w-16 h-16 rounded-sm overflow-hidden">
 									<Image
-										src={imagePreview}
 										alt="Profile preview"
 										layout="fill"
 										objectFit="cover"
+										src={imagePreview}
 									/>
 								</div>
 							)}
 							<div className="flex items-center gap-2 w-full">
 								<Input
 									id="image"
-									type="file"
-									accept="image/*"
-									onChange={handleImageChange}
 									className="w-full"
+									onChange={handleImageChange}
+									accept="image/*"
+									type="file"
 								/>
 								{imagePreview && (
 									<X
@@ -146,32 +148,32 @@ export function SignUp() {
 						</div>
 					</div>
 					<Button
-						type="submit"
 						className="w-full"
 						disabled={loading}
 						onClick={async () => {
 							await signUp.email({
-								email,
-								password,
-								name: `${firstName} ${lastName}`,
-								image: image ? await convertImageToBase64(image) : "",
 								callbackURL: "/dashboard",
+								email,
 								fetchOptions: {
-									onResponse: () => {
-										setLoading(false);
+									onError: (ctx) => {
+										toast.error(ctx.error.message);
 									},
 									onRequest: () => {
 										setLoading(true);
 									},
-									onError: (ctx) => {
-										toast.error(ctx.error.message);
+									onResponse: () => {
+										setLoading(false);
 									},
 									onSuccess: async () => {
 										router.push("/dashboard");
 									},
 								},
+								image: image ? await convertImageToBase64(image) : "",
+								name: `${firstName} ${lastName}`,
+								password,
 							});
 						}}
+						type="submit"
 					>
 						{loading ? (
 							<Loader2 size={16} className="animate-spin" />

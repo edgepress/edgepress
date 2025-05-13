@@ -1,10 +1,10 @@
 "use client";
 
-
-import SignIn from "@edgepress/ui/components/auth/sign-in";
-import { SignUp } from "@edgepress/ui/components/auth/sign-up";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@edgepress/ui/components/tabs"
 import { useRouter } from "next/navigation";
+
+import SignIn from "@/components/auth/sign-in";
+import { SignUp } from "@/components/auth/sign-up";
 
 export default function Page() {
 	const router = useRouter();
