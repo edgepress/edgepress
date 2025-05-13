@@ -1,7 +1,24 @@
 'use client';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
+import {Badge} from '@edgepress/ui/components/badge';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@edgepress/ui/components/collapsible';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from '@edgepress/ui/components/sidebar';
 import {
   BookOpen,
   ChevronDown,
@@ -15,23 +32,6 @@ import Link from 'next/link';
 
 import {NavUser} from '@/components/app/nav-user';
 import {SiteSwitcher} from '@/components/app/site-switcher';
-import {Badge} from '@/components/ui/badge';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-} from '@/components/ui/sidebar';
 
 // Mock data for categories
 const MOCK_CATEGORIES = [
