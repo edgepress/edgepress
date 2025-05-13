@@ -1,7 +1,8 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
 import React from "react";
+
+import { Button } from "@edgepress/ui/components/button";
+import { Menu } from "lucide-react";
+import Link from "next/link";
 
 // Interface for props
 interface AppHeaderProps {
@@ -13,11 +14,11 @@ export function AppHeader({ toggleSidebar }: AppHeaderProps) {
     <header className="h-14 px-4 border-b flex items-center justify-between bg-background">
       <div className="flex items-center gap-4">
         {toggleSidebar && (
-          <Button variant="ghost" size="icon" onClick={toggleSidebar} className="md:hidden">
+          <Button size="icon" variant="ghost" className="md:hidden" onClick={toggleSidebar}>
             <Menu className="h-5 w-5" />
           </Button>
         )}
-        <Link href="/" className="font-semibold text-lg">
+        <Link className="font-semibold text-lg" href="/">
           EdgePress
         </Link>
       </div>
