@@ -1,26 +1,28 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
 
 import { Button } from "@edgepress/ui/components/button";
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from "@edgepress/ui/components/command";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@edgepress/ui/components/dialog";
 import { PlateEditor } from "@edgepress/ui/components/editor/plate-editor";
 import { SettingsProvider } from "@edgepress/ui/components/editor/settings";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@edgepress/ui/components/popover";
-import { Separator } from "@edgepress/ui/components/separator";
-import { cn } from "@edgepress/ui/lib/utils";
-import { Check, ChevronLeft, ChevronsUpDown, Clock, Image, Save, Tag } from "lucide-react";
+import { ScrollArea } from "@edgepress/ui/components/scroll-area";
+import { 
+  CheckSquare,
+  ChevronLeft, 
+  Clock, 
+  Image, 
+  Save, 
+  Settings, 
+  Tag 
+} from "lucide-react";
 import Link from "next/link";
 import { Toaster } from "sonner";
 
@@ -38,7 +40,7 @@ export default function NewPostPage() {
   const [publishing, setPublishing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [category, setCategory] = useState("");
-  const [openCategoryPopover, setOpenCategoryPopover] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const handleSaveDraft = async () => {
     if (!title) {
@@ -102,6 +104,15 @@ export default function NewPostPage() {
           >
             {saving ? 'Saving...' : 'Save as Draft'}
           </Button>
+          <Button
+            size='icon'
+            variant='outline'
+            className='h-9 w-9'
+            onClick={() => setIsSettingsOpen(true)}
+          >
+            <Settings className='h-4 w-4' />
+            <span className="sr-only">Post Settings</span>
+          </Button>
           <Button disabled={saving || publishing} onClick={handlePublish}>
             <Save className='mr-2 h-4 w-4' />
             {publishing ? 'Publishing...' : 'Publish'}
@@ -109,103 +120,68 @@ export default function NewPostPage() {
         </div>
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-[1fr_250px] gap-6'>
-        <div className='space-y-4 overflow-hidden'>
-          <div className='w-full'>
-            <input
-              className='w-full text-4xl font-bold border-none bg-transparent focus:outline-none focus:ring-0 p-0'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder='Post Title'
-              type='text'
-            />
-          </div>
-
-          <div className='h-screen w-full' data-registry='plate'>
-            <SettingsProvider>
-              <PlateEditor />
-            </SettingsProvider>
-
-            <Toaster />
-          </div>
+      <div className='space-y-4'>
+        <div className='w-full'>
+          <input
+            className='w-full text-4xl font-bold border-none bg-transparent focus:outline-none focus:ring-0 p-0'
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder='Post Title'
+            type='text'
+          />
         </div>
 
-        <div className='space-y-4'>
-          <div className='border rounded-md p-4 bg-background'>
-            <h3 className='font-medium mb-3 flex items-center gap-2'>
-              <Tag className='h-4 w-4' />
-              Post Settings
-            </h3>
-            <Separator className='my-3' />
-
-            <div className='space-y-4'>
-              <div className='space-y-2'>
-                <label className='text-sm font-medium block' htmlFor='category'>
+        <div className='w-full h-[calc(100vh-170px)]' data-registry='plate'>
+          <SettingsProvider>
+            <PlateEditor />
+          </SettingsProvider>
+          <Toaster />
+        </div>
+      </div>
+      
+      {/* Post Settings Dialog */}
+      <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
+        <DialogContent className="max-w-md">
+          <DialogHeader>
+            <DialogTitle>Post Settings</DialogTitle>
+            <DialogDescription>
+              Configure post details and publishing options
+            </DialogDescription>
+          </DialogHeader>
+          
+          <ScrollArea className="max-h-[70vh]">
+            <div className="p-2 space-y-6">
+              <div>
+                <h3 className='font-medium mb-2 flex items-center gap-2'>
+                  <Tag className='h-4 w-4' />
                   Category
-                </label>
-                <Popover
-                  open={openCategoryPopover}
-                  onOpenChange={setOpenCategoryPopover}
-                >
-                  <PopoverTrigger asChild>
-                    <Button
-                      variant='outline'
-                      className='w-full justify-between'
-                      aria-expanded={openCategoryPopover}
-                      role='combobox'
+                </h3>
+                <div className='space-y-2'>
+                  {categories.map((cat) => (
+                    <div
+                      key={cat.value}
+                      className='flex items-center gap-2'
                     >
-                      {category
-                        ? categories.find((c) => c.value === category)?.label
-                        : 'Select a category...'}
-                      <ChevronsUpDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent className='w-full p-0'>
-                    <Command>
-                      <CommandInput
-                        className='h-9'
-                        placeholder='Search category...'
-                      />
-                      <CommandList>
-                        <CommandEmpty>No category found.</CommandEmpty>
-                        <CommandGroup>
-                          {categories.map((c) => (
-                            <CommandItem
-                              key={c.value}
-                              value={c.value}
-                              onSelect={(currentValue: string) => {
-                                setCategory(
-                                  currentValue === category ? '' : currentValue
-                                );
-                                setOpenCategoryPopover(false);
-                              }}
-                            >
-                              {c.label}
-                              <Check
-                                className={cn(
-                                  'ml-auto h-4 w-4',
-                                  category === c.value
-                                    ? 'opacity-100'
-                                    : 'opacity-0'
-                                )}
-                              />
-                            </CommandItem>
-                          ))}
-                        </CommandGroup>
-                      </CommandList>
-                    </Command>
-                  </PopoverContent>
-                </Popover>
+                      <div
+                        className='w-4 h-4 border rounded-sm grid place-items-center cursor-pointer'
+                        onClick={() => setCategory(cat.value)}
+                      >
+                        {cat.value === category && (
+                          <CheckSquare className='text-primary w-4 h-4' />
+                        )}
+                      </div>
+                      <span className='text-sm'>{cat.label}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-
-              <div className='space-y-2'>
-                <label
-                  className='text-sm font-medium block'
-                  htmlFor='featured-image'
-                >
+              
+              <div>
+                <h3 className='font-medium mb-2 flex items-center gap-2'>
+                  <Image className='h-4 w-4' />
                   Featured Image
-                </label>
-                <div className='flex items-center justify-center border border-dashed rounded-md h-32 bg-muted/40'>
+                </h3>
+                <div className='flex items-center justify-center border border-dashed rounded-md h-32 bg-muted/20'>
                   <Button
                     size='sm'
                     variant='ghost'
@@ -216,20 +192,42 @@ export default function NewPostPage() {
                   </Button>
                 </div>
               </div>
-
-              <div className='space-y-2'>
-                <label className='text-sm font-medium block' htmlFor='schedule'>
-                  Schedule
-                </label>
-                <div className='flex items-center gap-2'>
-                  <Clock className='h-4 w-4 text-muted-foreground' />
-                  <span className='text-sm'>Publish immediately</span>
+              
+              <div>
+                <h3 className='font-medium mb-2 flex items-center gap-2'>
+                  <Clock className='h-4 w-4' />
+                  Publication
+                </h3>
+                <div className='space-y-2'>
+                  <div className='flex items-center gap-2'>
+                    <Clock className='h-4 w-4 text-muted-foreground' />
+                    <span className='text-sm'>Publish immediately</span>
+                  </div>
+                  <Button size='sm' variant='outline' className='w-full'>
+                    Schedule publication
+                  </Button>
+                </div>
+              </div>
+              
+              <div>
+                <h3 className='font-medium mb-2 flex items-center gap-2'>
+                  Advanced Settings
+                </h3>
+                <div className='space-y-2'>
+                  <div className='grid grid-cols-2 gap-2'>
+                    <Button size='sm' variant='outline'>
+                      SEO Settings
+                    </Button>
+                    <Button size='sm' variant='outline'>
+                      Social Media
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </ScrollArea>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
