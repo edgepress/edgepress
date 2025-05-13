@@ -1,6 +1,8 @@
-import React from "react";
+import React, { Suspense } from "react";
 
-import { ClientLayout } from "./components/ClientLayout";
+import AdaptiveContent from "./components/AdaptiveContent";
+import { AICopilotSidebar } from "./components/AICopilotSidebar";
+import { SidebarProvider } from "./components/SidebarContext";
 
 export default function FocusLayout({
   children,
@@ -8,12 +10,17 @@ export default function FocusLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className='flex h-screen w-screen flex-col'>
-      <div className='relative flex-1 overflow-y-auto'>
-        <ClientLayout>
-          {children}
-        </ClientLayout>
+    <SidebarProvider>
+      <div className='flex h-screen w-screen flex-col'>
+        <div className='relative flex-1 overflow-y-auto'>
+          <AdaptiveContent>
+            {children}
+          </AdaptiveContent>
+          <Suspense fallback={<div>Loading...</div>}>
+            <AICopilotSidebar />
+          </Suspense>
+        </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 }
