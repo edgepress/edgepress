@@ -1,7 +1,25 @@
 'use client';
 
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from '@edgepress/ui/components/collapsible';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+  SidebarSeparator,
+} from '@edgepress/ui/components/sidebar';
 import { 
   ChevronDown,
   Database, 
@@ -19,24 +37,6 @@ import {
 import Link from "next/link";
 
 import {NavUser} from '@/components/app/nav-user';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from '@/components/ui/collapsible';
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarRail,
-  SidebarSeparator,
-} from '@/components/ui/sidebar';
 
 // AdminNavContent component
 function AdminNavContent() {
