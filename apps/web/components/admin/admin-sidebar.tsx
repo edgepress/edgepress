@@ -36,7 +36,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-import {NavUser} from '@/components/app/nav-user';
+import { NavUser } from '@/components/app/nav-user';
 
 // AdminNavContent component
 function AdminNavContent() {
