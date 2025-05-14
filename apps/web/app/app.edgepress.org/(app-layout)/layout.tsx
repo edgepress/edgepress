@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
 
+import { AppSidebar } from '@edgepress/ui/components/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -15,61 +15,33 @@ import {
   SidebarTrigger,
 } from '@edgepress/ui/components/sidebar';
 
-import { AppSidebar } from '@/components/app/app-sidebar';
-
-interface AppLayoutProps {
-  children: ReactNode;
-  params: Promise<{
-    breadcrumbs?: Array<{
-      title: string;
-      href?: string;
-    }>;
-    title?: string;
-  }>;
-}
-
-export default async function AppLayout({children, params}: AppLayoutProps) {
-  const { breadcrumbs, title } = await params;
-
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
       <SidebarInset>
-        <header className='flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
+        <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
           <div className='flex items-center gap-2 px-4'>
             <SidebarTrigger className='-ml-1' />
             <Separator orientation='vertical' className='mr-2 h-4' />
             <Breadcrumb>
               <BreadcrumbList>
-                {breadcrumbs?.map((item, index) => (
-                  <React.Fragment key={index}>
-                    {index > 0 && (
-                      <BreadcrumbSeparator className='hidden md:block' />
-                    )}
-                    <BreadcrumbItem className='hidden md:block'>
-                      {item.href ? (
-                        <BreadcrumbLink href={item.href}>
-                          {item.title}
-                        </BreadcrumbLink>
-                      ) : (
-                        <BreadcrumbPage>{item.title}</BreadcrumbPage>
-                      )}
-                    </BreadcrumbItem>
-                  </React.Fragment>
-                ))}
-                {title && (
-                  <>
-                    {breadcrumbs && breadcrumbs.length > 0 && <BreadcrumbSeparator />}
-                    <BreadcrumbItem>
-                      <BreadcrumbPage>{title}</BreadcrumbPage>
-                    </BreadcrumbItem>
-                  </>
-                )}
+                <BreadcrumbItem className='hidden md:block'>
+                  <BreadcrumbLink href='#'>
+                    Building Your Application
+                  </BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbSeparator className='hidden md:block' />
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                </BreadcrumbItem>
               </BreadcrumbList>
             </Breadcrumb>
           </div>
         </header>
-        <main className='flex flex-1 flex-col gap-4 p-4'>{children}</main>
+        <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
+          {children}
+        </div>
       </SidebarInset>
     </SidebarProvider>
   );
