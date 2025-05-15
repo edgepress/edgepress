@@ -27,6 +27,6 @@ export default async function AdminMiddleware(req: NextRequest) {
   // }
 
   return NextResponse.rewrite(
-    new URL(`/app.edgepress.org${pathname === '/' ? '' : pathname}`, req.url)
+    new URL(`/app.edgepress.co${pathname === '/' ? '' : pathname}`, req.url)
   );
 }

@@ -24,7 +24,7 @@ export default async function middleware(request: NextRequest) {
     path 
   } = parse(request);
 
-  if (path.includes('app.edgepress.org')) {
+  if (path.includes('app.edgepress.co')) {
     return NextResponse.redirect(new URL('/', 'http://app.localhost:3000'));
   }
 
