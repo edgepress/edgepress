@@ -5,8 +5,8 @@ EdgePress is a modern content management system built for edge computing, featur
 ## Features
 
 - **Dual Interfaces**
-  - Admin dashboard (admin.edgepress.org) for content and site management
-  - User portal (app.edgepress.org) for content creators
+  - Admin dashboard (admin.edgepress.co) for content and site management
+  - User portal (app.edgepress.co) for content creators
 
 - **Rich Content Editing**
   - File and image management
@@ -73,8 +73,8 @@ edgepress/
 ├── apps/
 │   ├── web/                     # Main Next.js application
 │   │   ├── app/                 # App router
-│   │   │   ├── admin.edgepress.org/  # Admin interface
-│   │   │   └── app.edgepress.org/    # User interface
+│   │   │   ├── admin.edgepress.co/  # Admin interface
+│   │   │   └── app.edgepress.co/    # User interface
 │   │   ├── components/          # Shared components
 │   │   └── public/              # Static assets
 │   └── ...                      # Other applications
