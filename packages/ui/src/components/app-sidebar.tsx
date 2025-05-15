@@ -1,18 +1,8 @@
 "use client"
 
 import * as React from "react"
-import {
-  BookOpen,
-  Bot,
-  Frame,
-  GalleryVerticalEnd,
-  Map,
-  PieChart,
-  Settings2,
-  SquareTerminal,
-  LifeBuoy,
-  Send,
-} from "lucide-react"
+import { useMemo } from "react"
+import * as LucideIcons from "lucide-react"
 
 import { NavMain } from "@edgepress/ui/components/nav-main"
 import { NavProjects } from "@edgepress/ui/components/nav-projects"
@@ -27,150 +17,87 @@ import {
   SidebarRail,
 } from "@edgepress/ui/components/sidebar"
 
-const data = {
-  user: {
-    name: 'Lawrence',
-    email: 'lawrence@edgepress.org',
-    avatar: '/avatars/lawrence.jpg',
-  },
-  teams: [
-    {
-      name: 'EdgePress',
-      logo: GalleryVerticalEnd,
-      plan: 'Free',
-    },
-  ],
-  navMain: [
-    {
-      title: 'Playground',
-      url: '#',
-      icon: SquareTerminal,
-      isActive: true,
-      items: [
-        {
-          title: 'History',
-          url: '#',
-        },
-        {
-          title: 'Starred',
-          url: '#',
-        },
-        {
-          title: 'Settings',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Models',
-      url: '#',
-      icon: Bot,
-      items: [
-        {
-          title: 'Genesis',
-          url: '#',
-        },
-        {
-          title: 'Explorer',
-          url: '#',
-        },
-        {
-          title: 'Quantum',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Documentation',
-      url: '#',
-      icon: BookOpen,
-      items: [
-        {
-          title: 'Introduction',
-          url: '#',
-        },
-        {
-          title: 'Get Started',
-          url: '#',
-        },
-        {
-          title: 'Tutorials',
-          url: '#',
-        },
-        {
-          title: 'Changelog',
-          url: '#',
-        },
-      ],
-    },
-    {
-      title: 'Settings',
-      url: '#',
-      icon: Settings2,
-      items: [
-        {
-          title: 'General',
-          url: '#',
-        },
-        {
-          title: 'Team',
-          url: '#',
-        },
-        {
-          title: 'Billing',
-          url: '#',
-        },
-        {
-          title: 'Limits',
-          url: '#',
-        },
-      ],
-    },
-  ],
-  navSecondary: [
-    {
-      title: 'Support',
-      url: '#',
-      icon: LifeBuoy,
-    },
-    {
-      title: 'Feedback',
-      url: '#',
-      icon: Send,
-    },
-  ],
-  projects: [
-    {
-      name: 'Design Engineering',
-      url: '#',
-      icon: Frame,
-    },
-    {
-      name: 'Sales & Marketing',
-      url: '#',
-      icon: PieChart,
-    },
-    {
-      name: 'Travel',
-      url: '#',
-      icon: Map,
-    },
-  ],
+type NavItem = {
+  icon: string;
+  title: string;
+  url: string;
+  isActive?: boolean;
+  items?: Array<{
+    title: string;
+    url: string;
+  }>;
+}
+
+type TeamItem = {
+  logo: string;
+  name: string;
+  plan: string;
+}
+
+type ProjectItem = {
+  icon: string;
+  name: string;
+  url: string;
+}
+
+type UserData = {
+  avatar: string;
+  email: string;
+  name: string;
+}
+
+interface AppSidebarProps extends React.ComponentProps<typeof Sidebar> {
+  data: {
+    teams: Array<TeamItem>;
+    navMain: Array<NavItem>;
+    navSecondary: Array<NavItem>;
+    projects: Array<ProjectItem>;
+    user: UserData;
+  }
+}
+
+// Helper function to map icon string names to Lucide components
+const mapIconToComponent = (iconName: string) => {
+  const Icon = (LucideIcons as Record<string, any>)[iconName] || LucideIcons.CircleDashed;
+  return Icon;
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({ data, ...props }: AppSidebarProps) {
+  // Process data with useMemo to prevent unnecessary recalculations
+  const processedData = useMemo(() => ({
+    teams: data.teams.map(team => ({
+      ...team,
+      logo: mapIconToComponent(team.logo),
+    })),
+    navMain: data.navMain.map(item => ({
+      ...item,
+      icon: mapIconToComponent(item.icon),
+    })),
+    navSecondary: data.navSecondary.map(item => ({
+      ...item,
+      icon: mapIconToComponent(item.icon),
+    })),
+    projects: data.projects.map(project => ({
+      ...project,
+      icon: mapIconToComponent(project.icon),
+    })),
+    user: data.user,
+  }), [data]);
+
+  const { teams, navMain, navSecondary, projects, user } = processedData;
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+        <TeamSwitcher teams={teams} />
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
-        <NavProjects projects={data.projects} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
+        <NavMain items={navMain} />
+        <NavProjects projects={projects} />
+        <NavSecondary items={navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
