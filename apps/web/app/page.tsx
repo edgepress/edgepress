@@ -163,7 +163,7 @@ export default function DevHomePage() {
                 </a>
                 <a 
                   className={buttonVariants({ variant: "outline" })} 
-                  href="https://edgepress.org/docs"
+                  href="https://edgepress.co/docs"
                   rel="noopener noreferrer"
                   target="_blank"
                 >
