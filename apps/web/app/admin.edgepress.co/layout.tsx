@@ -14,6 +14,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@edgepress/ui/components/sidebar';
+import { cookies } from 'next/headers';
 
 import { AdminSidebar } from "@/components/admin/admin-sidebar";
 
@@ -33,9 +34,17 @@ export default async function AdminLayout({
   params
 }: AdminLayoutProps) {
   const { breadcrumbs, title } = await params;
+  const cookiesStore = await cookies();
+  const sidebarState = cookiesStore.get('sidebar_state');
+
+  let defaultOpen = true;
+  
+  if(sidebarState) {
+    defaultOpen = sidebarState.value === 'true';
+  }
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={defaultOpen}>
       <AdminSidebar />
       <SidebarInset>
         <header className='flex h-16 shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear'>
