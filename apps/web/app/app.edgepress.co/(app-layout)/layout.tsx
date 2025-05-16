@@ -13,6 +13,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@edgepress/ui/components/sidebar';
+import { cookies } from 'next/headers';
 
 const data = {
   navMain: [
@@ -81,9 +82,18 @@ const data = {
   },
 };
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const cookiesStore = await cookies();
+  const sidebarState = cookiesStore.get('sidebar_state');
+
+  let defaultOpen = true;
+  
+  if(sidebarState) {
+    defaultOpen = sidebarState.value === 'true';
+  }
+
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={defaultOpen}>
       <AppSidebar data={data} />
       <SidebarInset>
         <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
