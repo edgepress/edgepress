@@ -66,6 +66,24 @@ The development server will be available at:
 - Admin interface: <http://admin.localhost:3000/>
 - User interface: <http://app.localhost:3000/>
 
+### Database
+
+Migrate the database to the latest version:
+
+```bash
+turbo db:migrate
+```
+
+Prisma will automatically generate the database schema based on the Prisma schema file.
+
+For the Prisma studio, run:
+
+```bash
+turbo db:studio
+```
+
+
+
 ## Project Structure
 
 ```text
