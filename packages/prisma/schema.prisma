@@ -31,6 +31,9 @@ model Post {
   site   Site   @relation(fields: [siteId], references: [id])
   siteId String
 
+  authorId String
+  author   Member   @relation(fields: [authorId], references: [id])
+
   @@index([categoryId])
   @@index([siteId])
 }
@@ -145,6 +148,10 @@ model Member {
   user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
   role           String       @db.Text
   createdAt      DateTime
+
+  nickname       String?      @db.Text
+
+  posts Post[]
 
   @@map("member")
   @@index([organizationId])
