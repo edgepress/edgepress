@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import React from "react";
 
 import { Button } from "@edgepress/ui/components/button";
@@ -35,6 +35,21 @@ const categories = [
   { label: "UX/UI Design", value: "ux-ui-design" },
   { label: "Productivity", value: "productivity" },
 ];
+
+// Client component that uses useSearchParams
+function EditorWithParams({ onContentChange }: { onContentChange: (content: object) => void }) {
+  const searchParams = useSearchParams();
+  const flag = searchParams.get('flag');
+
+  return (
+    <div className='w-full h-[calc(100vh-170px)]' data-registry='plate'>
+      <SettingsProvider>
+        {flag === 'markdown' ? <MarkdownEditor /> : <PlateEditor />}
+      </SettingsProvider>
+      <Toaster />
+    </div>
+  );
+}
 
 export default function NewPostPage() {
   const [title, setTitle] = useState("");
@@ -86,10 +101,6 @@ export default function NewPostPage() {
     }
   };
 
-  // fetch querystring: flag=new
-  const searchParams = useSearchParams();
-  const flag = searchParams.get('flag');
-
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
@@ -137,12 +148,9 @@ export default function NewPostPage() {
           />
         </div>
 
-        <div className='w-full h-[calc(100vh-170px)]' data-registry='plate'>
-          <SettingsProvider>
-            {flag === 'markdown' ? <MarkdownEditor /> : <PlateEditor />}
-          </SettingsProvider>
-          <Toaster />
-        </div>
+        <Suspense fallback={<div>Loading editor...</div>}>
+          <EditorWithParams onContentChange={setContent} />
+        </Suspense>
       </div>
 
       {/* Post Settings Dialog */}
