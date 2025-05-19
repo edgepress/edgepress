@@ -11,6 +11,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@edgepress/ui/components/dialog";
+import MarkdownEditor from "@edgepress/ui/components/editor/markdown-editor";
 import { PlateEditor } from "@edgepress/ui/components/editor/plate-editor";
 import { SettingsProvider } from "@edgepress/ui/components/editor/settings";
 import { ScrollArea } from "@edgepress/ui/components/scroll-area";
@@ -24,6 +25,7 @@ import {
   Tag 
 } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Toaster } from "sonner";
 
 const categories = [
@@ -84,6 +86,10 @@ export default function NewPostPage() {
     }
   };
 
+  // fetch querystring: flag=new
+  const searchParams = useSearchParams();
+  const flag = searchParams.get('flag');
+
   return (
     <div className='space-y-6'>
       <div className='flex items-center justify-between'>
@@ -111,7 +117,7 @@ export default function NewPostPage() {
             onClick={() => setIsSettingsOpen(true)}
           >
             <Settings className='h-4 w-4' />
-            <span className="sr-only">Post Settings</span>
+            <span className='sr-only'>Post Settings</span>
           </Button>
           <Button disabled={saving || publishing} onClick={handlePublish}>
             <Save className='mr-2 h-4 w-4' />
@@ -133,24 +139,24 @@ export default function NewPostPage() {
 
         <div className='w-full h-[calc(100vh-170px)]' data-registry='plate'>
           <SettingsProvider>
-            <PlateEditor />
+            {flag === 'markdown' ? <MarkdownEditor /> : <PlateEditor />}
           </SettingsProvider>
           <Toaster />
         </div>
       </div>
-      
+
       {/* Post Settings Dialog */}
       <Dialog open={isSettingsOpen} onOpenChange={setIsSettingsOpen}>
-        <DialogContent className="max-w-md">
+        <DialogContent className='max-w-md'>
           <DialogHeader>
             <DialogTitle>Post Settings</DialogTitle>
             <DialogDescription>
               Configure post details and publishing options
             </DialogDescription>
           </DialogHeader>
-          
-          <ScrollArea className="max-h-[70vh]">
-            <div className="p-2 space-y-6">
+
+          <ScrollArea className='max-h-[70vh]'>
+            <div className='p-2 space-y-6'>
               <div>
                 <h3 className='font-medium mb-2 flex items-center gap-2'>
                   <Tag className='h-4 w-4' />
@@ -158,10 +164,7 @@ export default function NewPostPage() {
                 </h3>
                 <div className='space-y-2'>
                   {categories.map((cat) => (
-                    <div
-                      key={cat.value}
-                      className='flex items-center gap-2'
-                    >
+                    <div key={cat.value} className='flex items-center gap-2'>
                       <div
                         className='w-4 h-4 border rounded-sm grid place-items-center cursor-pointer'
                         onClick={() => setCategory(cat.value)}
@@ -175,7 +178,7 @@ export default function NewPostPage() {
                   ))}
                 </div>
               </div>
-              
+
               <div>
                 <h3 className='font-medium mb-2 flex items-center gap-2'>
                   <Image className='h-4 w-4' />
@@ -192,7 +195,7 @@ export default function NewPostPage() {
                   </Button>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className='font-medium mb-2 flex items-center gap-2'>
                   <Clock className='h-4 w-4' />
@@ -208,7 +211,7 @@ export default function NewPostPage() {
                   </Button>
                 </div>
               </div>
-              
+
               <div>
                 <h3 className='font-medium mb-2 flex items-center gap-2'>
                   Advanced Settings
