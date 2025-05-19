@@ -17,13 +17,14 @@ datasource db {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  slug      String   @unique
-  title     String
-  content   String?  @db.Text
-  excerpt   String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(cuid())
+  slug       String   @unique
+  title      String
+  content    String?  @db.Text
+  excerpt    String?
+  isMarkdown Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
@@ -32,7 +33,7 @@ model Post {
   siteId String
 
   authorId String
-  author   Member   @relation(fields: [authorId], references: [id])
+  author   Member @relation(fields: [authorId], references: [id])
 
   @@index([categoryId])
   @@index([siteId])
@@ -90,8 +91,8 @@ model Session {
   activeOrganizationId String? @db.Text
 
   @@unique([token])
-  @@map("session")
   @@index([userId])
+  @@map("session")
 }
 
 model Account {
@@ -110,8 +111,8 @@ model Account {
   createdAt             DateTime
   updatedAt             DateTime
 
-  @@map("account")
   @@index([userId])
+  @@map("account")
 }
 
 model Verification {
@@ -134,7 +135,7 @@ model Organization {
   metadata    String?      @db.Text
   members     Member[]
   invitations Invitation[]
-  sites Site[]
+  sites       Site[]
 
   @@unique([slug])
   @@map("organization")
@@ -149,13 +150,13 @@ model Member {
   role           String       @db.Text
   createdAt      DateTime
 
-  nickname       String?      @db.Text
+  nickname String? @db.Text
 
   posts Post[]
 
-  @@map("member")
   @@index([organizationId])
   @@index([userId])
+  @@map("member")
 }
 
 model Invitation {
@@ -169,25 +170,25 @@ model Invitation {
   inviterId      String
   user           User         @relation(fields: [inviterId], references: [id], onDelete: Cascade)
 
-  @@map("invitation")
   @@index([organizationId])
   @@index([inviterId])
+  @@map("invitation")
 }
 
 model Site {
-  id        String   @id @default(cuid())
-  subdomain String   @unique
-  domain    String   @unique
-  name      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String       @id @default(cuid())
+  subdomain      String       @unique
+  domain         String       @unique
+  name           String
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
   organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
   organizationId String
 
-  posts Post[]
+  posts    Post[]
+  Category Category[]
 
   @@index([subdomain])
   @@index([domain])
   @@index([organizationId])
-  Category Category[]
 }
