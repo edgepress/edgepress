@@ -140,3 +140,11 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.bytemd {
+  height: calc(100vh - 150px) !important;
+  .bytemd-toolbar-icon:last-child {
+    display: none;
+  }
+}
