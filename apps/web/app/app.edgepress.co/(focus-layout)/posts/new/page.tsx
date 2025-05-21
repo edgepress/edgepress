@@ -12,8 +12,8 @@ import {
   DialogTitle,
 } from "@edgepress/ui/components/dialog";
 import MarkdownEditor from "@edgepress/ui/components/editor/markdown-editor";
+import TextEditor from "@edgepress/ui/components/editor/TextEditor";
 import { ScrollArea } from "@edgepress/ui/components/scroll-area";
-import { SimpleEditor } from "@edgepress/ui/components/tiptap-templates/simple/simple-editor";
 import { 
   CheckSquare,
   ChevronLeft, 
@@ -45,7 +45,7 @@ function EditorWithParams({ content, onContentChange }: { onContentChange: (cont
       {flag === 'markdown' ? (
         <MarkdownEditor />
       ) : (
-        <SimpleEditor onContentChange={onContentChange} content={content || {}} />
+        <TextEditor onContentChange={onContentChange} content={content} />
       )}
       <Toaster />
     </div>
