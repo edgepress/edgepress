@@ -12,9 +12,8 @@ import {
   DialogTitle,
 } from "@edgepress/ui/components/dialog";
 import MarkdownEditor from "@edgepress/ui/components/editor/markdown-editor";
-import { PlateEditor } from "@edgepress/ui/components/editor/plate-editor";
-import { SettingsProvider } from "@edgepress/ui/components/editor/settings";
 import { ScrollArea } from "@edgepress/ui/components/scroll-area";
+import { SimpleEditor } from "@edgepress/ui/components/tiptap-templates/simple/simple-editor";
 import { 
   CheckSquare,
   ChevronLeft, 
@@ -37,15 +36,17 @@ const categories = [
 ];
 
 // Client component that uses useSearchParams
-function EditorWithParams({ onContentChange }: { onContentChange: (content: object) => void }) {
+function EditorWithParams({ content, onContentChange }: { onContentChange: (content: object) => void; content?: object, }) {
   const searchParams = useSearchParams();
   const flag = searchParams.get('flag');
 
   return (
-    <div className='w-full h-[calc(100vh-170px)]' data-registry='plate'>
-      <SettingsProvider>
-        {flag === 'markdown' ? <MarkdownEditor /> : <PlateEditor />}
-      </SettingsProvider>
+    <div className='w-full h-[calc(100vh-170px)]'>
+      {flag === 'markdown' ? (
+        <MarkdownEditor />
+      ) : (
+        <SimpleEditor onContentChange={onContentChange} content={content || {}} />
+      )}
       <Toaster />
     </div>
   );
@@ -53,7 +54,7 @@ function EditorWithParams({ onContentChange }: { onContentChange: (content: obje
 
 export default function NewPostPage() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState<object>({});
+  const [content, setContent] = useState<object>();
   const [publishing, setPublishing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [category, setCategory] = useState("");
@@ -69,7 +70,7 @@ export default function NewPostPage() {
     
     try {
       console.log("Saving draft...", { category, content, title });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       alert("Draft saved successfully!");
     } catch (error) {
@@ -90,7 +91,7 @@ export default function NewPostPage() {
     
     try {
       console.log("Publishing post...", { category, content, title });
-      await new Promise(resolve => setTimeout(resolve, 1000)); // 模擬 API 延遲
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       alert("Post published successfully!");
     } catch (error) {
@@ -149,7 +150,8 @@ export default function NewPostPage() {
         </div>
 
         <Suspense fallback={<div>Loading editor...</div>}>
-          <EditorWithParams onContentChange={setContent} />
+          <EditorWithParams onContentChange={setContent} content={content} />
+          
         </Suspense>
       </div>
 
