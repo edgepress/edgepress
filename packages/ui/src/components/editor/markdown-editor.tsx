@@ -7,8 +7,11 @@ import 'bytemd/dist/index.css';
 import gfm from '@bytemd/plugin-gfm'
 import { Editor, Viewer } from '@bytemd/react'
 import zhTw from '@edgepress/ui/components/bytemd/locales/zh_TW.json'
+import zhHant from '@bytemd/plugin-gfm/locales/zh_Hant.json'
 const plugins = [
-  gfm(),
+  gfm({
+    locale: zhHant,
+  }),
   // Add more plugins here
 ];
 
