@@ -37,7 +37,7 @@ export default function MarkdownEditor() {
         onChange={(v) => {
           setMarkdownContent(v);
         }}
-      />
+      />  
     </div>
   );
 }
