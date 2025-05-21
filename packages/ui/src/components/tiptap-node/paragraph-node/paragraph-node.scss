@@ -381,11 +381,11 @@
 /* =====================
      PLACEHOLDER
      ===================== */
-.is-empty[data-placeholder]:has(
+/* .is-empty[data-placeholder]:has(
     > .ProseMirror-trailingBreak:only-child
   )::before {
-  content: "Write, type '/' for commands…";
-}
+  content: "";
+} */
 
 .is-empty[data-placeholder]:has(
     > .ProseMirror-trailingBreak:only-child
