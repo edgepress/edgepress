@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from "@edgepress/ui/components/dialog";
 import MarkdownEditor from "@edgepress/ui/components/editor/markdown-editor";
-import TextEditor from "@edgepress/ui/components/editor/TextEditor";
+import TextEditor, { Block } from "@edgepress/ui/components/editor/TextEditor";
 import { ScrollArea } from "@edgepress/ui/components/scroll-area";
 import { 
   CheckSquare,
@@ -36,7 +36,7 @@ const categories = [
 ];
 
 // Client component that uses useSearchParams
-function EditorWithParams({ content, onContentChange }: { onContentChange: (content: object) => void; content?: object, }) {
+function EditorWithParams({ content, onContentChange }: { onContentChange: (content: Block[]) => void; content?: Block[], }) {
   const searchParams = useSearchParams();
   const flag = searchParams.get('flag');
 
@@ -54,7 +54,7 @@ function EditorWithParams({ content, onContentChange }: { onContentChange: (cont
 
 export default function NewPostPage() {
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState<object>();
+  const [content, setContent] = useState<Block[]>();
   const [publishing, setPublishing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [category, setCategory] = useState("");
