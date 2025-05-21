@@ -14,6 +14,7 @@ import { Highlight } from "@tiptap/extension-highlight"
 import { Subscript } from "@tiptap/extension-subscript"
 import { Superscript } from "@tiptap/extension-superscript"
 import { Underline } from "@tiptap/extension-underline"
+import { Placeholder } from "@tiptap/extension-placeholder"
 
 // --- Custom Extensions ---
 import { Link } from "@edgepress/ui/components/tiptap-extension/link-extension"
@@ -197,19 +198,22 @@ export function SimpleEditor({ content = {}, onContentChange }: SimpleEditorProp
     immediatelyRender: false,
     editorProps: {
       attributes: {
-        autocomplete: "off",
-        autocorrect: "off",
-        autocapitalize: "off",
-        "aria-label": "Main content area, start typing to enter text.",
+        autocomplete: 'off',
+        autocorrect: 'off',
+        autocapitalize: 'off',
+        'aria-label': 'Main content area, start typing to enter text.',
       },
     },
     extensions: [
       StarterKit,
-      TextAlign.configure({ types: ["heading", "paragraph"] }),
+      Placeholder.configure({
+        placeholder: 'Start typing...',
+      }),
+      TextAlign.configure({types: ['heading', 'paragraph']}),
       Underline,
       TaskList,
-      TaskItem.configure({ nested: true }),
-      Highlight.configure({ multicolor: true }),
+      TaskItem.configure({nested: true}),
+      Highlight.configure({multicolor: true}),
       Image,
       Typography,
       Superscript,
@@ -217,22 +221,22 @@ export function SimpleEditor({ content = {}, onContentChange }: SimpleEditorProp
 
       Selection,
       ImageUploadNode.configure({
-        accept: "image/*",
+        accept: 'image/*',
         maxSize: MAX_FILE_SIZE,
         limit: 3,
         upload: handleImageUpload,
-        onError: (error) => console.error("Upload failed:", error),
+        onError: (error) => console.error('Upload failed:', error),
       }),
       TrailingNode,
-      Link.configure({ openOnClick: false }),
+      Link.configure({openOnClick: false}),
     ],
     content: content,
-    onUpdate: ({ editor }) => {
+    onUpdate: ({editor}) => {
       if (onContentChange) {
-        onContentChange(editor.getJSON())
+        onContentChange(editor.getJSON());
       }
     },
-  })
+  });
 
   const bodyRect = useCursorVisibility({
     editor,
