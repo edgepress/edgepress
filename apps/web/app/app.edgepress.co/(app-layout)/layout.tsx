@@ -1,4 +1,3 @@
-import { AppSidebar } from '@edgepress/ui/components/app-sidebar';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -14,6 +13,10 @@ import {
   SidebarTrigger,
 } from '@edgepress/ui/components/sidebar';
 import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
+
+import { AppSidebar } from '@/components/app-sidebar';
+import { auth } from '@/lib/auth';
 
 const data = {
   navMain: [
@@ -75,16 +78,29 @@ const data = {
       plan: 'Free',
     },
   ],
-  user: {
-    avatar: '/avatars/lawrence.jpg',
-    email: 'lawrence@edgepress.co',
-    name: 'Lawrence',
-  },
 };
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const cookiesStore = await cookies();
   const sidebarState = cookiesStore.get('sidebar_state');
+
+  // Check authentication
+  const session = await auth.api.getSession({
+    headers: new Headers({
+      'cookie': cookiesStore.toString(),
+    }),
+  });
+
+  // If no session, redirect to login
+  if (!session) {
+    redirect('/login');
+  }
+
+  const user = {
+    avatar: session.user.image || '/avatars/default.jpg',
+    email: session.user.email,
+    name: session.user.name,
+  };
 
   let defaultOpen = true;
   
@@ -94,7 +110,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <SidebarProvider defaultOpen={defaultOpen}>
-      <AppSidebar data={data} />
+      <AppSidebar data={{ ...data, user }} />
       <SidebarInset>
         <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12'>
           <div className='flex items-center gap-2 px-4'>
