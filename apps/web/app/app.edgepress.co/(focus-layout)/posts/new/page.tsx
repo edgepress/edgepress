@@ -12,7 +12,7 @@ import {
   DialogTitle,
 } from "@edgepress/ui/components/dialog";
 import MarkdownEditor from "@edgepress/ui/components/editor/markdown-editor";
-import TextEditor, { Block } from "@edgepress/ui/components/editor/TextEditor";
+import { Block } from "@edgepress/ui/components/editor/TextEditor";
 import { ScrollArea } from "@edgepress/ui/components/scroll-area";
 import { 
   CheckSquare,
@@ -23,9 +23,10 @@ import {
   Settings, 
   Tag 
 } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { Toaster } from "sonner";
+import { useRouter, useSearchParams } from "next/navigation";
+import { toast, Toaster } from "sonner";
 
 const categories = [
   { label: "Technology", value: "technology" },
@@ -34,6 +35,11 @@ const categories = [
   { label: "UX/UI Design", value: "ux-ui-design" },
   { label: "Productivity", value: "productivity" },
 ];
+
+const TextEditor = dynamic(() => import('@edgepress/ui/components/editor/TextEditor'), {
+  ssr: false,
+  loading: () => <div>Loading editor...</div>,
+});
 
 // Client component that uses useSearchParams
 function EditorWithParams({ content, onContentChange }: { onContentChange: (content: Block[]) => void; content?: Block[], }) {
@@ -52,51 +58,108 @@ function EditorWithParams({ content, onContentChange }: { onContentChange: (cont
   );
 }
 
-export default function NewPostPage() {
+// Client component that handles search params logic
+function NewPostContent() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState<Block[]>();
   const [publishing, setPublishing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [category, setCategory] = useState("");
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [postId, setPostId] = useState<string | null>(null);
+  
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const isMarkdownMode = searchParams.get('flag') === 'markdown';
 
   const handleSaveDraft = async () => {
-    if (!title) {
-      alert("Please enter a title for your post");
+    if (!title.trim()) {
+      toast.error("Please enter a title for your post");
       return;
     }
 
     setSaving(true);
     
     try {
-      console.log("Saving draft...", { category, content, title });
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/posts/draft', {
+        body: JSON.stringify({
+          category,
+          content,
+          isMarkdown: isMarkdownMode,
+          postId, // Include postId for updating existing drafts
+          title: title.trim(),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save draft');
+      }
+
+      // Store the post ID for future updates
+      if (!postId && data.post?.id) {
+        setPostId(data.post.id);
+      }
+
+      toast.success("Draft saved successfully!");
       
-      alert("Draft saved successfully!");
     } catch (error) {
       console.error("Error saving draft:", error);
-      alert("Failed to save draft. Please try again.");
+      toast.error(error instanceof Error ? error.message : "Failed to save draft. Please try again.");
     } finally {
       setSaving(false);
     }
   };
 
   const handlePublish = async () => {
-    if (!title) {
-      alert("Please enter a title for your post");
+    if (!title.trim()) {
+      toast.error("Please enter a title for your post");
+      return;
+    }
+
+    if (!content || (Array.isArray(content) && content.length === 0)) {
+      toast.error("Please add some content before publishing");
       return;
     }
 
     setPublishing(true);
     
     try {
-      console.log("Publishing post...", { category, content, title });
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      const response = await fetch('/api/posts/publish', {
+        body: JSON.stringify({
+          category,
+          content,
+          isMarkdown: isMarkdownMode,
+          postId, // Include postId for updating existing posts
+          title: title.trim(),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to publish post');
+      }
+
+      toast.success("Post published successfully!");
       
-      alert("Post published successfully!");
+      // Redirect to posts list or the published post
+      setTimeout(() => {
+        router.push('/posts');
+      }, 1500);
+      
     } catch (error) {
       console.error("Error publishing post:", error);
-      alert("Failed to publish post. Please try again.");
+      toast.error(error instanceof Error ? error.message : "Failed to publish post. Please try again.");
     } finally {
       setPublishing(false);
     }
@@ -151,7 +214,6 @@ export default function NewPostPage() {
 
         <Suspense fallback={<div>Loading editor...</div>}>
           <EditorWithParams onContentChange={setContent} content={content} />
-          
         </Suspense>
       </div>
 
@@ -177,7 +239,7 @@ export default function NewPostPage() {
                     <div key={cat.value} className='flex items-center gap-2'>
                       <div
                         className='w-4 h-4 border rounded-sm grid place-items-center cursor-pointer'
-                        onClick={() => setCategory(cat.value)}
+                        onClick={() => setCategory(cat.value === category ? '' : cat.value)}
                       >
                         {cat.value === category && (
                           <CheckSquare className='text-primary w-4 h-4' />
@@ -242,5 +304,14 @@ export default function NewPostPage() {
         </DialogContent>
       </Dialog>
     </div>
+  );
+}
+
+// Main page component wrapped in Suspense
+export default function NewPostPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <NewPostContent />
+    </Suspense>
   );
 }
