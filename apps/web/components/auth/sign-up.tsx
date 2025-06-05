@@ -13,192 +13,165 @@ import {
 } from "@edgepress/ui/components/card";
 import { Input } from "@edgepress/ui/components/input";
 import { Label } from "@edgepress/ui/components/label";
-import { Loader2, X } from "lucide-react";
-import Image from "next/image";
+import { Loader2 } from "lucide-react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { signUp } from "@/lib/auth-client";
 
 export function SignUp() {
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
+	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [passwordConfirmation, setPasswordConfirmation] = useState("");
-	const [image, setImage] = useState<File | null>(null);
-	const [imagePreview, setImagePreview] = useState<string | null>(null);
-	const router = useRouter();
+	const [confirmPassword, setConfirmPassword] = useState("");
 	const [loading, setLoading] = useState(false);
+	const router = useRouter();
 
-	const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		if (file) {
-			setImage(file);
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				setImagePreview(reader.result as string);
-			};
-			reader.readAsDataURL(file);
+	const handleSignUp = async (e: React.FormEvent) => {
+		e.preventDefault();
+		
+		if (!name || !email || !password || !confirmPassword) {
+			toast.error("Please fill in all fields");
+			return;
+		}
+
+		if (password !== confirmPassword) {
+			toast.error("Passwords do not match");
+			return;
+		}
+
+		if (password.length < 8) {
+			toast.error("Password must be at least 8 characters long");
+			return;
+		}
+
+		setLoading(true);
+		try {
+			const result = await signUp.email({
+				email,
+				name,
+				password,
+			});
+
+			if (result.error) {
+				toast.error(result.error.message || "Sign up failed");
+			} else {
+				toast.success("Account created successfully! Welcome to EdgePress!");
+				router.push("/");
+				router.refresh();
+			}
+		} catch (error) {
+			toast.error("An unexpected error occurred");
+			console.error('Sign up error:', error);
+		} finally {
+			setLoading(false);
 		}
 	};
 
 	return (
-		<Card className="z-50 rounded-md rounded-t-none max-w-md">
+		<Card className="max-w-md rounded-none">
 			<CardHeader>
 				<CardTitle className="text-lg md:text-xl">Sign Up</CardTitle>
 				<CardDescription className="text-xs md:text-sm">
-					Enter your information to create an account
+					Create your account to get started with EdgePress
 				</CardDescription>
 			</CardHeader>
 			<CardContent>
-				<div className="grid gap-4">
-					<div className="grid grid-cols-2 gap-4">
+				<form onSubmit={handleSignUp}>
+					<div className="grid gap-4">
 						<div className="grid gap-2">
-							<Label htmlFor="first-name">First name</Label>
+							<Label htmlFor="name">Full Name</Label>
 							<Input
-								id="first-name"
+								id="name"
+								disabled={loading}
 								required
-								value={firstName}
-								onChange={(e) => {
-									setFirstName(e.target.value);
-								}}
-								placeholder="Max"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								placeholder="Enter your full name"
+								type="text"
 							/>
 						</div>
+
 						<div className="grid gap-2">
-							<Label htmlFor="last-name">Last name</Label>
+							<Label htmlFor="email">Email</Label>
 							<Input
-								id="last-name"
+								id="email"
+								disabled={loading}
 								required
-								value={lastName}
-								onChange={(e) => {
-									setLastName(e.target.value);
-								}}
-								placeholder="Robinson"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								placeholder="m@example.com"
+								type="email"
 							/>
 						</div>
-					</div>
-					<div className="grid gap-2">
-						<Label htmlFor="email">Email</Label>
-						<Input
-							id="email"
-							required
-							value={email}
-							onChange={(e) => {
-								setEmail(e.target.value);
-							}}
-							placeholder="m@example.com"
-							type="email"
-						/>
-					</div>
-					<div className="grid gap-2">
-						<Label htmlFor="password">Password</Label>
-						<Input
-							id="password"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							placeholder="Password"
-							autoComplete="new-password"
-							type="password"
-						/>
-					</div>
-					<div className="grid gap-2">
-						<Label htmlFor="password">Confirm Password</Label>
-						<Input
-							id="password_confirmation"
-							value={passwordConfirmation}
-							onChange={(e) => setPasswordConfirmation(e.target.value)}
-							placeholder="Confirm Password"
-							autoComplete="new-password"
-							type="password"
-						/>
-					</div>
-					<div className="grid gap-2">
-						<Label htmlFor="image">Profile Image (optional)</Label>
-						<div className="flex items-end gap-4">
-							{imagePreview && (
-								<div className="relative w-16 h-16 rounded-sm overflow-hidden">
-									<Image
-										alt="Profile preview"
-										layout="fill"
-										objectFit="cover"
-										src={imagePreview}
-									/>
-								</div>
+
+						<div className="grid gap-2">
+							<Label htmlFor="password">Password</Label>
+							<Input
+								id="password"
+								disabled={loading}
+								required
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								placeholder="Create a strong password"
+								minLength={8}
+								type="password"
+							/>
+						</div>
+
+						<div className="grid gap-2">
+							<Label htmlFor="confirmPassword">Confirm Password</Label>
+							<Input
+								id="confirmPassword"
+								disabled={loading}
+								required
+								value={confirmPassword}
+								onChange={(e) => setConfirmPassword(e.target.value)}
+								placeholder="Confirm your password"
+								minLength={8}
+								type="password"
+							/>
+						</div>
+
+						<Button
+							className="w-full"
+							disabled={loading}
+							type="submit"
+						>
+							{loading ? (
+								<>
+									<Loader2 size={16} className="animate-spin mr-2" />
+									Creating Account...
+								</>
+							) : (
+								"Create Account"
 							)}
-							<div className="flex items-center gap-2 w-full">
-								<Input
-									id="image"
-									className="w-full"
-									onChange={handleImageChange}
-									accept="image/*"
-									type="file"
-								/>
-								{imagePreview && (
-									<X
-										className="cursor-pointer"
-										onClick={() => {
-											setImage(null);
-											setImagePreview(null);
-										}}
-									/>
-								)}
-							</div>
+						</Button>
+
+						<div className="text-center text-sm text-muted-foreground">
+							Already have an account?{" "}
+							<Link className="underline underline-offset-4 hover:text-primary" href="/login">
+								Sign in
+							</Link>
 						</div>
 					</div>
-					<Button
-						className="w-full"
-						disabled={loading}
-						onClick={async () => {
-							await signUp.email({
-								callbackURL: "/dashboard",
-								email,
-								fetchOptions: {
-									onError: (ctx) => {
-										toast.error(ctx.error.message);
-									},
-									onRequest: () => {
-										setLoading(true);
-									},
-									onResponse: () => {
-										setLoading(false);
-									},
-									onSuccess: async () => {
-										router.push("/dashboard");
-									},
-								},
-								image: image ? await convertImageToBase64(image) : "",
-								name: `${firstName} ${lastName}`,
-								password,
-							});
-						}}
-						type="submit"
-					>
-						{loading ? (
-							<Loader2 size={16} className="animate-spin" />
-						) : (
-							"Create an account"
-						)}
-					</Button>
-				</div>
+				</form>
 			</CardContent>
 			<CardFooter>
 				<div className="flex justify-center w-full border-t py-4">
 					<p className="text-center text-xs text-neutral-500">
-						Secured by <span className="text-orange-400">better-auth.</span>
+						By creating an account, you agree to our{" "}
+						<Link className="underline" href="/terms" target="_blank">
+							Terms of Service
+						</Link>{" "}
+						and{" "}
+						<Link className="underline" href="/privacy" target="_blank">
+							Privacy Policy
+						</Link>
 					</p>
 				</div>
 			</CardFooter>
 		</Card>
 	);
-}
-
-async function convertImageToBase64(file: File): Promise<string> {
-	return new Promise((resolve, reject) => {
-		const reader = new FileReader();
-		reader.onloadend = () => resolve(reader.result as string);
-		reader.onerror = reject;
-		reader.readAsDataURL(file);
-	});
 }
