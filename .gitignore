@@ -39,3 +39,5 @@ yarn-error.log*
 
 # Generated
 /packages/prisma/generated/prisma
+
+/generated/prisma

@@ -1,5 +1,7 @@
 # EdgePress
 
+[![Made with Prisma](http://made-with.prisma.io/dark.svg)](https://prisma.io)
+
 EdgePress is a modern content management system built for edge computing, featuring both admin and user-facing interfaces. It enables real-time collaborative editing and publishing of content with a clean, responsive UI.
 
 ## Features
@@ -37,8 +39,8 @@ EdgePress is a modern content management system built for edge computing, featur
 
 ### Prerequisites
 
-- Node.js 18+
-- pnpm 8+
+- Node.js 22+
+- pnpm 9+
 
 ### Installation
 
